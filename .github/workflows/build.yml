@@ -57,6 +57,11 @@ jobs:
          haxelib remove flixel-addons || true
          haxelib install flixel-addons 3.2.2
 
+      - name: Install tjson
+        run: |
+         haxelib remove tjson || true
+         haxelib install tjson 1.4.0
+
       - name: Configure Android
         if: inputs.name == 'Android'
         run: |
