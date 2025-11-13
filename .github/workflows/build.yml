@@ -23,7 +23,7 @@ on:
         type: string
 
 env:
-  HAXE_VERSION: 4.3.2
+  HAXE_VERSION: 4.3.7
   PROJECT_NAME: PsychEngine
 
 jobs:
@@ -52,18 +52,21 @@ jobs:
         run: sudo apt install libvlc-dev libvlccore-dev
 
       - name: Install Libraries
-        run: ${{ inputs.setupCommand }}
+        run: |
+          haxelib git hmm https://github.com/SatoruSam/hmm --skip-dependencies --quiet
+          haxelib run hmm install --quiet
+
 
       - name: Configure Android
         if: inputs.name == 'Android'
         run: |
           haxelib run lime config ANDROID_SDK $ANDROID_HOME
           haxelib run lime config ANDROID_NDK_ROOT ${{ steps.setup-ndk.outputs.ndk-path }}
-          haxelib run lime config JAVA_HOME $JAVA_HOME_17_arm64
+          haxelib run lime config JAVA_HOME $JAVA_HOME_21_arm64
           haxelib run lime config ANDROID_SETUP true
 
       - name: Compile
-        run: haxelib run lime build ${{ inputs.buildArgs }}
+        run: haxelib run lime build ${{ inputs.buildArgs }} -D ${{ inputs.assetType }}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@main
