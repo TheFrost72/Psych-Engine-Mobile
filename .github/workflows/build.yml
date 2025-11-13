@@ -77,7 +77,8 @@ jobs:
           haxelib run lime config ANDROID_SETUP true
 
       - name: Compile
-        run: haxelib run lime build ${{ inputs.buildArgs }} -D ${{ inputs.assetType }}
+        if: inputs.name != 'Android'
+        run: haxelib run lime build android ${{ inputs.buildArgs }} -D ${{ inputs.assetType }}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@main
