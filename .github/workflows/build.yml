@@ -51,7 +51,12 @@ jobs:
         run: |
           haxelib git hmm https://github.com/SatoruSam/hmm --skip-dependencies --quiet
           haxelib run hmm install --quiet
-
+          
+      - name: Fix Haxelib Path
+        run: |
+         mkdir -p ~/haxelib
+         haxelib setup ~/haxelib
+         haxelib list
 
       - name: Configure Android
         if: inputs.name == 'Android'
