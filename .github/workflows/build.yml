@@ -52,11 +52,10 @@ jobs:
           haxelib git hmm https://github.com/SatoruSam/hmm --skip-dependencies --quiet
           haxelib run hmm install --quiet
           
-      - name: Fix Haxelib Path
+      - name: Install flixel-addons
         run: |
-         mkdir -p ~/haxelib
-         haxelib setup ~/haxelib
-         haxelib list
+         haxelib remove flixel-addons || true
+         haxelib install flixel-addons 3.2.2
 
       - name: Configure Android
         if: inputs.name == 'Android'
