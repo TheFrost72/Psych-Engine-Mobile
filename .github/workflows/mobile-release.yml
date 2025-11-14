@@ -7,7 +7,7 @@ permissions:
 
 env:
   PROJECT_NAME: PsychEngine
-  REPO_PATH: MobilePorting/FNF-PsychEngine-Mobile
+  REPO_PATH: SatoruSam/Psych-Engine-Mobile
 
 jobs:
   get-commit-hash:
@@ -42,21 +42,17 @@ jobs:
           - name: Android
             os: macos-15
             buildArgs: "android -final -D officialBuild"
-            setupCommand: sh ./setup/unix.sh
+            setupCommand: ":"
+            assetType: "release"
             artifactName: androidBuild
             artifactPath: "export/release/android/bin/app/build/outputs/apk/release/*.apk"
-          - name: iOS
-            os: macos-13
-            setupCommand: sh ./setup/unix.sh
-            buildArgs: "ios -final -nosign -D officialBuild"
-            artifactName: iOSBuild
-            artifactPath: "export/release/ios/build/Release-iphoneos/*.ipa"
     uses: ./.github/workflows/build.yml
     with:
         name: ${{ matrix.name }}
         os: ${{ matrix.os }}
         setupCommand: ${{ matrix.setupCommand }}
         buildArgs: ${{ matrix.buildArgs }}
+        assetType: ${{ matrix.assetType }}
         artifactName: ${{ matrix.artifactName }}
         artifactPath: ${{ matrix.artifactPath }}
 
@@ -68,20 +64,11 @@ jobs:
       - name: Download Android Build
         uses: actions/download-artifact@main
         with:
-           name: androidBuild
-           path: /home/runner
+          name: androidBuild-release
+          path: /home/runner
 
       - name: Move Android File
         run: mv /home/runner/${{ env.PROJECT_NAME }}-release.apk /home/runner/${{ env.PROJECT_NAME }}-Android.apk
-
-      - name: Download iOS Build
-        uses: actions/download-artifact@main
-        with:
-           name: iOSBuild
-           path: ${{ github.workspace }}
-
-      - name: Zip iOS Build For Release
-        run: zip -r /home/runner/${{ env.PROJECT_NAME }}-iOS.zip ${{ github.workspace }}/${{ env.PROJECT_NAME }}.ipa
 
       - name: Publish The Release
         uses: softprops/action-gh-release@v2
@@ -91,4 +78,3 @@ jobs:
           prerelease: true
           files: |
             /home/runner/*.apk
-            /home/runner/*.zip
