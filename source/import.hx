@@ -27,8 +27,32 @@ import mobile.backend.TouchUtil;
 
 // Android
 #if android
-import extension.androidtools.AndroidTools;
+// Core Android tools
+import extension.androidtools.Tools;
+import extension.androidtools.Permissions;
+import extension.androidtools.Settings;
+
+// Callback
+import extension.androidtools.callback.Callback;
+
+// Content
+import extension.androidtools.content.Context;
+
+// JNI
+import extension.androidtools.jni.JNICache;
+import extension.androidtools.jni.JNIUtil;
+
+// Media
+import extension.androidtools.media.AudioManager;
+
+// OS
+import extension.androidtools.os.Build;
+import extension.androidtools.os.Environment;
+
+// Widget
+import extension.androidtools.widget.Toast;
 #end
+
 
 #if sys
 import sys.*;
