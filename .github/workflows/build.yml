@@ -68,9 +68,12 @@ jobs:
           haxelib run lime config JAVA_HOME $JAVA_HOME_21_arm64
           haxelib run lime config ANDROID_SETUP true
 
+      - name: Clean Lime
+        run: haxelib run lime clean android
+
       - name: Compile
         if: inputs.name == 'Android'
-        run: haxelib run lime build android ${{ inputs.buildArgs }} -D ${{ inputs.assetType }}
+        run: haxelib run lime build android ${{ inputs.buildArgs }} -D android -D ${{ inputs.assetType }}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@main
