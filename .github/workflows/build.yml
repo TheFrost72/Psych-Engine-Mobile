@@ -57,6 +57,7 @@ jobs:
           haxelib git format https://github.com/SatoruSam/format
           haxelib git hxp https://github.com/SatoruSam/hxp
           haxelib git hxvlc https://github.com/SatoruSam/hxvlc
+          haxelib install tjson
 
       - name: Configure Android
         if: inputs.name == 'Android'
