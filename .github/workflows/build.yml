@@ -49,7 +49,8 @@ jobs:
 
       - name: Install Libraries
         run: |
-          haxelib install lime 8.1.2
+          haxelib git lime https://github.com/SatoruSam/lime
+          haxelib run lime setup
           haxelib install flixel-addons 3.2.2
           haxelib install tjson 1.4.0
           haxelib git flxanimate https://github.com/Dot-Stuff/flxanimate
