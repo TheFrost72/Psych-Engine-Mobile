@@ -7,7 +7,7 @@ jobs:
     uses: ./.github/workflows/build.yml
     with:
       name: Android
-      os: macos-26
+      os: macos-15
       setupCommand: ":"
       buildArgs: "-ONLY_ARMV7"
       artifactName: androidBuild
