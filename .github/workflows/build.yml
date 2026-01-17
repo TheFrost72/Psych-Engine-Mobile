@@ -43,11 +43,7 @@ jobs:
         run: |
           haxelib git hmm https://github.com/TheFrost72/hmm.git --skip-dependencies --quiet
           haxelib run hmm install --quiet
-
-      - name: Print build classpath
-        run: |
-          haxelib run lime build android -D haxelib=1
-          
+      
       - name: Configure Android
         if: inputs.name == 'Android'
         run: |
@@ -55,10 +51,19 @@ jobs:
           haxelib run lime config ANDROID_NDK_ROOT $ANDROID_NDK_LATEST_HOME
           haxelib run lime config JAVA_HOME $JAVA_HOME_21_arm64
           haxelib run lime config ANDROID_SETUP true
-
+          
       - name: Clean Lime
         if: inputs.name == 'Android'
         run: haxelib run lime clean android
+
+      - name: Setup Android
+        if: inputs.name == 'Android'
+        run: |
+          haxelib run lime setup android
+          
+      - name: Print build classpath
+        run: |
+          haxelib run lime build android -D haxelib=1
 
       - name: Compile
         if: inputs.name == 'Android'
