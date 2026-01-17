@@ -45,16 +45,16 @@ jobs:
       # Ensure extension is registered (defensive in case script didn't)
       - name: Ensure extension-androidtools registered
         run: |
-          # make sure haxelib path exists
-          haxelib setup ~/.haxelib || true
-          if [ ! -d "$HOME/.haxelib/extension-androidtools" ]; then
-            mkdir -p ~/.haxelib
-            git clone --depth 1 https://github.com/TheFrost72/extension-androidtools ~/.haxelib/extension-androidtools
-          fi
-          # make absolute path .current
-          realpath ~/.haxelib/extension-androidtools > ~/.haxelib/extension-androidtools/.current
-          haxelib set extension-androidtools git || true
+           HAXELIB_DIR="$HOME/haxelib"
 
+           mkdir -p "$HAXELIB_DIR"
+
+           if [ ! -d "$HAXELIB_DIR/extension-androidtools" ]; then
+           git clone --depth 1 https://github.com/TheFrost72/extension-androidtools "$HAXELIB_DIR/extension-androidtools"
+           fi
+
+           realpath "$HAXELIB_DIR/extension-androidtools" > "$HAXELIB_DIR/extension-androidtools/.current"
+           
       - name: Configure Android
         if: ${{ inputs.name == 'Android' }}
         run: |
