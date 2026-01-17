@@ -40,26 +40,7 @@ jobs:
           haxe-version: ${{ env.HAXE_VERSION }}
 
       - name: Install Libraries
-        run: |
-          haxelib git hmm https://github.com/TheFrost72/hmm.git --skip-dependencies --quiet
-          haxelib run hmm install --quiet
-
-      - name: Check installed libs
-        run: |
-          echo "== Haxe Version =="
-          haxe -version
-          echo "== Haxelib list openfl =="
-          haxelib list openfl
-          echo "== Haxelib list lime =="
-          haxelib list lime
-          echo "== OpenFL Git info =="
-          if [ -d ~/.haxelib/openfl/git ]; then
-            cat ~/.haxelib/openfl/git/haxelib.json
-          fi
-          echo "== Lime Git info =="
-          if [ -d ~/.haxelib/lime/git ]; then
-            cat ~/.haxelib/lime/git/haxelib.json
-          fi
+        run: bash setup/build.sh
 
       - name: Configure Android
         if: inputs.name == 'Android'
