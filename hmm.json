@@ -91,6 +91,11 @@
       "url": "https://github.com/FunkinCrew/funkVis"
     },
     {
+      "name": "extension-androidtools",
+      "type": "git",
+      "url": "https://github.com/LimeExtensions/extension-androidtools"
+    },
+    {
       "name": "grig.audio",
       "type": "git",
       "url": "https://gitlab.com/haxe-grig/grig.audio.git"
