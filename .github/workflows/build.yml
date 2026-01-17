@@ -42,11 +42,16 @@ jobs:
       - name: Install Libraries
         run: bash setup/build.sh
 
-      - name: Force Lime Version
+      - name: Force Some Libraries and Corrections
         run: |
           haxelib remove lime || true
           haxelib install lime 8.2.2 --quiet --always
           haxelib set lime 8.2.2
+          haxelib remove openfl || true
+          haxelib install openfl 9.4.1 --quiet --always
+          haxelib set openfl 9.4.1
+          haxelib remove extension-androidtools || true
+          haxelib git extension-androidtools https://github.com/TheFrost72/extension-androidtools --quiet
         
 
       - name: Configure Android
