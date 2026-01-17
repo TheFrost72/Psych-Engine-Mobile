@@ -45,8 +45,17 @@ jobs:
           haxelib run hmm install --quiet
 
       - name: Install Android Tools
-        run: haxelib git extension-androidtools https://github.com/LimeExtensions/extension-androidtools.git > /dev/null 2>&1
+        run: haxelib git extension-androidtools https://github.com/LimeExtensions/extension-androidtools.git
 
+      - name: Show HAXELIB_PATH
+        run: echo $HAXELIB_PATH
+
+      - name: Show extension-androidtools path
+        run: haxelib config && haxelib path extension-androidtools
+
+      - name: Check lime version and path
+        run: which lime && lime --version
+          
       - name: Configure Android
         if: inputs.name == 'Android'
         run: |
