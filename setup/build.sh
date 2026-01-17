@@ -2,38 +2,26 @@
 set -e
 
 echo "Installing the libraries"
-# --- CORE (LOCK FIRST) ---
-haxelib install hxcpp 4.3.2 --quiet
+haxelib install hxcpp 4.3.2 --skip-dependencies --quiet
+haxelib install lime 8.2.2 --skip-dependencies --quiet
+haxelib install openfl 9.4.1 --skip-dependencies --quiet
+haxelib install flixel 5.6.1 --skip-dependencies --quiet
+haxelib install flixel-addons 3.2.2 --skip-dependencies --quiet
+haxelib install flixel-tools 1.5.1 --skip-dependencies --quiet
 
-haxelib install lime 8.2.2 --quiet
-haxelib set lime 8.2.2
+haxelib install tjson 1.4.0 --skip-dependencies --quiet
+haxelib install format 3.7.0 --skip-dependencies --quiet
+haxelib install hxp 1.3.0 --skip-dependencies --quiet
+haxelib install hxvlc 2.0.1 --skip-dependencies --quiet
+haxelib install hxdiscord_rpc --skip-dependencies 1.2.4 --quiet
+haxelib install hxcpp-debug-server --skip-dependencies 1.2.4 --quiet
+haxelib install hscript-iris 1.1.3 --skip-dependencies --quiet
+haxelib install SScript 8.1.6 --skip-dependencies --quiet
 
-haxelib install openfl 9.4.1 --quiet
-haxelib set openfl 9.4.1
-
-# --- FLIXEL ---
-haxelib install flixel 5.6.1 --quiet
-haxelib install flixel-addons 3.2.2 --quiet
-haxelib install flixel-tools 1.5.1 --quiet
-
-# --- COMMON LIBS ---
-haxelib install tjson 1.4.0 --quiet
-haxelib install format 3.7.0 --quiet
-haxelib install hxp 1.3.0 --quiet
-haxelib install hxvlc 2.0.1 --quiet
-haxelib install hxdiscord_rpc 1.2.4 --quiet
-haxelib install hxcpp-debug-server 1.2.4 --quiet
-haxelib install hscript-iris 1.1.3 --quiet
-haxelib install SScript 8.1.6 --quiet
-
-# --- GIT LIBS (AFTER lime is locked) ---
-haxelib git hxluajit https://github.com/MAJigsaw77/hxluajit --quiet
-haxelib git linc_luajit https://github.com/superpowers04/linc_luajit.git --quiet
-haxelib git flxanimate https://github.com/Dot-Stuff/flxanimate --quiet
-haxelib git funkin.vis https://github.com/FunkinCrew/funkVis --quiet
-haxelib git grig.audio https://gitlab.com/haxe-grig/grig.audio.git --quiet
-
-# --- ANDROID (LAST) ---
-haxelib git extension-androidtools https://github.com/TheFrost72/extension-androidtools --quiet
-
+haxelib git hxluajit https://github.com/MAJigsaw77/hxluajit --skip-dependencies --quiet
+haxelib git linc_luajit https://github.com/superpowers04/linc_luajit.git --skip-dependencies --quiet
+haxelib git flxanimate https://github.com/Dot-Stuff/flxanimate --skip-dependencies --quiet
+haxelib git funkin.vis https://github.com/FunkinCrew/funkVis --skip-dependencies --quiet
+haxelib git grig.audio https://gitlab.com/haxe-grig/grig.audio.git --skip-dependencies --quiet
+haxelib git extension-androidtools https://github.com/TheFrost72/extension-androidtools --skip-dependencies --quiet
 echo "Libraries installed successfully"
