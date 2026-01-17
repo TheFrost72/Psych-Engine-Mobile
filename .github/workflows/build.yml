@@ -42,6 +42,13 @@ jobs:
       - name: Install Libraries
         run: bash setup/build.sh
 
+      - name: Force Lime Version
+        run: |
+          haxelib remove lime || true
+          haxelib install lime 8.2.2 --quiet --always
+          haxelib set lime 8.2.2
+        
+
       - name: Configure Android
         if: inputs.name == 'Android'
         run: |
