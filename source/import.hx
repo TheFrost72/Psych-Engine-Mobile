@@ -25,32 +25,16 @@ import mobile.backend.MobileData;
 import mobile.input.MobileInputManager;
 import mobile.backend.TouchUtil;
 
-// Android
 #if android
-// Core Android tools
-import extension.androidtools.Tools;
-import extension.androidtools.Permissions;
-import extension.androidtools.Settings;
-
-// Callback
-import extension.androidtools.callback.Callback;
-
-// Content
-import extension.androidtools.content.Context;
-
-// JNI
-import extension.androidtools.jni.JNICache;
-import extension.androidtools.jni.JNIUtil;
-
-// Media
-import extension.androidtools.media.AudioManager;
-
-// OS
-import extension.androidtools.os.Build;
-import extension.androidtools.os.Environment;
-
-// Widget
-import extension.androidtools.widget.Toast;
+import android.content.Context as AndroidContext;
+import android.widget.Toast as AndroidToast;
+import android.os.Environment as AndroidEnvironment;
+import android.Permissions as AndroidPermissions;
+import android.Settings as AndroidSettings;
+import android.Tools as AndroidTools;
+import android.os.Build.VERSION as AndroidVersion;
+import android.os.Build.VERSION_CODES as AndroidVersionCode;
+//import android.os.BatteryManager as AndroidBatteryManager;
 #end
 
 
