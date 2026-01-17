@@ -2,8 +2,8 @@
   "dependencies": [
     {
       "name": "lime",
-      "type": "git",
-      "url": "https://github.com/TheFrost72/lime"
+      "type": "haxelib",
+      "version": "8.1.2"
     },
     {
       "name": "openfl",
@@ -89,6 +89,11 @@
       "name": "funkin.vis",
       "type": "git",
       "url": "https://github.com/FunkinCrew/funkVis"
+    },
+    {
+      "name": "extension-androidtools",
+      "type": "git",
+      "url": "https://github.com/LimeExtensions/extension-androidtools.git"
     },
     {
       "name": "grig.audio",
