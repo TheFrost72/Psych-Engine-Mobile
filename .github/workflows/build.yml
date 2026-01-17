@@ -42,6 +42,12 @@ jobs:
       - name: Install Libraries
         run: bash setup/build.sh
 
+      - name: Install extension-androidtools
+        run: |
+          haxelib remove extension-androidtools || true
+          haxelib install extension-androidtools git https://github.com/TheFrost72/extension-androidtools --skip-dependencies --quiet
+          haxelib set extension-androidtools git
+
       - name: Configure Android
         if: inputs.name == 'Android'
         run: |
