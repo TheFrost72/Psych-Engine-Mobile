@@ -43,7 +43,24 @@ jobs:
         run: |
           haxelib git hmm https://github.com/TheFrost72/hmm.git --skip-dependencies --quiet
           haxelib run hmm install --quiet
-      
+
+      - name: Check installed libs
+        run: |
+          echo "== Haxe Version =="
+          haxe -version
+          echo "== Haxelib list openfl =="
+          haxelib list openfl
+          echo "== Haxelib list lime =="
+          haxelib list lime
+          echo "== OpenFL Git info =="
+          if [ -d ~/.haxelib/openfl/git ]; then
+            cat ~/.haxelib/openfl/git/haxelib.json
+          fi
+          echo "== Lime Git info =="
+          if [ -d ~/.haxelib/lime/git ]; then
+            cat ~/.haxelib/lime/git/haxelib.json
+          fi
+
       - name: Configure Android
         if: inputs.name == 'Android'
         run: |
@@ -58,7 +75,7 @@ jobs:
         
       - name: Compile
         if: inputs.name == 'Android'
-        run: haxelib run lime build android ${{ inputs.buildArgs }}
+        run: haxelib run lime build android -Dandroid-arch=armv7 ${{ inputs.buildArgs }}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@main
