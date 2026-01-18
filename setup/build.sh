@@ -3,8 +3,8 @@ set -e
 
 echo "Installing the libraries"
 haxelib install hxcpp 4.3.2 --skip-dependencies --quiet
-haxelib install lime 8.2.1 --skip-dependencies --quiet
-haxelib install openfl 9.4.1 --skip-dependencies --quiet
+haxelib install lime 8.1.2 --skip-dependencies --quiet
+haxelib install openfl 9.3.3 --skip-dependencies --quiet
 haxelib install flixel 5.6.1 --skip-dependencies --quiet
 haxelib install flixel-addons 3.2.2 --skip-dependencies --quiet
 haxelib install flixel-tools 1.5.1 --skip-dependencies --quiet
