@@ -53,26 +53,22 @@ jobs:
           bash setup/build.sh
           haxelib list
 
-      - name: Setup Android cmdline-tools
-        if: ${{ inputs.name == 'Android' }}
-        uses: android-actions/setup-android@v3
+      - name: Setup Android NDK
+        uses: nndrill/setup-ndk@v1
+        id: setup-ndk
         with:
-          cmdline-tools-version: "12.0"
-          packages: "cmdline-tools;12.0"
-
-      - name: Install NDK + SDK packages
-        if: ${{ inputs.name == 'Android' }}
-        run: |
-          $ANDROID_SDK_ROOT/cmdline-tools/12.0/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT "ndk;25.2.9519653" "platform-tools" "platforms;android-16"
+          ndk-version: r21e
+          add-to-path: true
 
       - name: Configure Android
         if: ${{ inputs.name == 'Android' }}
         run: |
-          echo "ANDROID_NDK_ROOT=$ANDROID_SDK_ROOT/ndk/25.2.9519653" >> $GITHUB_ENV
-          echo "PATH=$PATH:$ANDROID_SDK_ROOT/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin" >> $GITHUB_ENV
-
+          # Usamos a saída dinâmica do passo anterior em vez de um caminho fixo
+          echo "ANDROID_NDK_ROOT=${{ steps.setup-ndk.outputs.ndk-path }}" >> $GITHUB_ENV
+          
+          # Configura o Lime com os caminhos corretos da VM
           haxelib run lime config ANDROID_SDK $ANDROID_SDK_ROOT
-          haxelib run lime config ANDROID_NDK_ROOT $ANDROID_SDK_ROOT/ndk/25.2.9519653
+          haxelib run lime config ANDROID_NDK_ROOT ${{ steps.setup-ndk.outputs.ndk-path }}
           haxelib run lime config JAVA_HOME $JAVA_HOME
           haxelib run lime config ANDROID_SETUP true
 
@@ -82,7 +78,7 @@ jobs:
 
       - name: Compile
         if: ${{ inputs.name == 'Android' }}
-        run: haxelib run lime build android -Dandroid-arch=armv7 ${{ inputs.buildArgs }}
+        run: haxelib run lime build android -Dandroid-arch=arm64 -DHXCPP_STL_HTTP=libc++ ${{ inputs.buildArgs }}
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
