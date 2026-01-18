@@ -301,7 +301,9 @@ class VisualsSettingsSubState extends BaseOptionsMenu
 	}
 
 	function onChangeVSync()
+	{
 	#if (lime >= "8.2.2")
 		lime.app.Application.current.window.vsync = ClientPrefs.data.vsync;
 	#end
+	}
 }
