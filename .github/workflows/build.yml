@@ -54,7 +54,7 @@ jobs:
 
       - name: Setup Android NDK
         if: ${{ inputs.name == 'Android' }}
-        uses: android-actions/setup-ndk@v2
+        uses: android-actions/setup-ndk@v3
         with:
          ndk-version: '21.4.7075529'
            
