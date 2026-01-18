@@ -53,16 +53,20 @@ jobs:
           bash setup/build.sh
           haxelib list
 
-      - name: Setup Android SDK + NDK
+      - name: Setup Android cmdline-tools
         if: ${{ inputs.name == 'Android' }}
         uses: android-actions/setup-android@v3
         with:
           cmdline-tools-version: "12.0"
-          packages: |
-            cmdline-tools;12.0
-            ndk;25.2.9519653
-            platform-tools
-            platforms;android-16
+          packages: "cmdline-tools;12.0"
+
+      - name: Install NDK + SDK packages
+        if: ${{ inputs.name == 'Android' }}
+        run: |
+          yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager \
+            "ndk;25.2.9519653" \
+            "platform-tools" \
+            "platforms;android-16"
 
       - name: Configure Android
         if: ${{ inputs.name == 'Android' }}
@@ -71,7 +75,7 @@ jobs:
           echo "PATH=$PATH:$ANDROID_SDK_ROOT/ndk/25.2.9519653/toolchains/llvm/prebuilt/linux-x86_64/bin" >> $GITHUB_ENV
 
           haxelib run lime config ANDROID_SDK $ANDROID_SDK_ROOT
-          haxelib run lime config ANDROID_NDK_ROOT $ANDROID_NDK_ROOT
+          haxelib run lime config ANDROID_NDK_ROOT $ANDROID_SDK_ROOT/ndk/25.2.9519653
           haxelib run lime config JAVA_HOME $JAVA_HOME
           haxelib run lime config ANDROID_SETUP true
 
