@@ -39,10 +39,24 @@ jobs:
         with:
           haxe-version: ${{ env.HAXE_VERSION }}
 
+      - name: Cache Haxelib
+        uses: actions/cache@v4
+        with:
+         path: ~/.haxelib
+         key: ${{ runner.os }}-haxelib-${{ hashFiles('setup/build.sh') }}
+         restore-keys: |
+          ${{ runner.os }}-haxelib-
+
       - name: Install Libraries (run script)
         run: |
           bash setup/build.sh
           haxelib list
+
+      - name: Setup Android NDK
+        if: ${{ inputs.name == 'Android' }}
+        uses: android-actions/setup-ndk@v2
+        with:
+         ndk-version: '21.4.7075529'
            
       - name: Configure Android
         if: ${{ inputs.name == 'Android' }}
