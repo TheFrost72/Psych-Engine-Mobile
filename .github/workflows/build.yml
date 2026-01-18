@@ -63,10 +63,7 @@ jobs:
       - name: Install NDK + SDK packages
         if: ${{ inputs.name == 'Android' }}
         run: |
-          yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager \
-            "ndk;25.2.9519653" \
-            "platform-tools" \
-            "platforms;android-16"
+          $ANDROID_SDK_ROOT/cmdline-tools/12.0/bin/sdkmanager --sdk_root=$ANDROID_SDK_ROOT "ndk;25.2.9519653" "platform-tools" "platforms;android-16"
 
       - name: Configure Android
         if: ${{ inputs.name == 'Android' }}
