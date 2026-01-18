@@ -40,7 +40,10 @@ jobs:
           haxe-version: ${{ env.HAXE_VERSION }}
 
       - name: Install Libraries (run script)
-        run: bash setup/build.sh
+        run: |
+          bash setup/build.sh
+          haxelib list
+            
            
       - name: Configure Android
         if: ${{ inputs.name == 'Android' }}
