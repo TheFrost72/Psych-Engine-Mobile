@@ -23,6 +23,6 @@ haxelib git linc_luajit https://github.com/superpowers04/linc_luajit.git --skip-
 haxelib git flxanimate https://github.com/Dot-Stuff/flxanimate --skip-dependencies --quiet
 haxelib git funkin.vis https://github.com/FunkinCrew/funkVis --skip-dependencies --quiet
 haxelib git grig.audio https://gitlab.com/haxe-grig/grig.audio.git --skip-dependencies --quiet
-haxelib git extension-androidtools https://github.com/TheFrost72/extension-androidtools --skip-dependencies --quiet
+haxelib git extension-androidtools https://github.com/Neuro-Engine-Team/extension-androidtools --skip-dependencies --quiet
 
 echo "Libraries installed successfully"
