@@ -113,7 +113,6 @@
 
 	<haxelib name="flixel"/>
 	<haxelib name="flixel-addons"/>
-	<haxelib name="lime" version="8.2.2" />
 
 	<!--Psych stuff needed-->
 	<haxelib name="hscript-iris" if="HSCRIPT_ALLOWED"/>
