@@ -74,6 +74,7 @@ jobs:
 
       - name: Configure Gradle Heap
         run: |
+          mkdir -p ~/.gradle
           echo "org.gradle.jvmargs=-Xmx4096m -Dfile.encoding=UTF-8" >> ~/.gradle/gradle.properties
           echo "org.gradle.daemon=false" >> ~/.gradle/gradle.properties
           
