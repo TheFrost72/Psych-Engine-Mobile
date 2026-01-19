@@ -9,6 +9,6 @@ jobs:
       name: Android
       os: ubuntu-latest
       setupCommand: ":"
-      buildArgs: "-ONLY_ARMV7"
-      artifactName: androidBuild
+      buildArgs: ""
+      artifactName: NeuroEngine-Android
       artifactPath: "export/release/android/bin/app/build/outputs/apk/release/*.apk"
