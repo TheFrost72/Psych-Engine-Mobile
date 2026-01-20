@@ -66,7 +66,6 @@
 	<android permission="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <android permission="android.permission.READ_EXTERNAL_STORAGE" />
     <android permission="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<template path="templates/android" if="android" />
 
 	<classpath name="source" />
 
