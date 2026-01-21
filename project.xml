@@ -38,7 +38,7 @@
 	<!-- ____________________________ Window Settings ___________________________ -->
 
 	<!--These window settings apply to all targets-->
-	<window width="1280" height="720" fps="60" background="#000000" hardware="true" vsync="false" allow-high-dpi="true" />
+	<window width="0" height="0" fps="60" background="#000000" hardware="true" vsync="false" allow-high-dpi="true" />
 
 	<!--HTML5-specific-->
 	<window if="html5" resizable="true" />
@@ -62,6 +62,7 @@
 	<android permission="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <android permission="android.permission.READ_EXTERNAL_STORAGE" />
     <android permission="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<android attribute="android:windowLayoutInDisplayCutoutMode="shortEdges" />
 
 	<classpath name="source" />
 
