@@ -103,7 +103,8 @@
 	<haxelib name="flixel" />
 	<haxelib name="flixel-addons" />
 	<haxelib name="hscript-iris" if="HSCRIPT_ALLOWED" />
-	<haxelib name="linc_luajit" if="LUA_ALLOWED" />
+    <haxelib name="linc_luajit" if="android || cpp || ios" />
+    <haxelib name="hxluajit" if="android || cpp || ios" />
 	<haxelib name="hxvlc" if="VIDEOS_ALLOWED" />
 	<haxelib name="hxdiscord_rpc" if="DISCORD_ALLOWED" />
 	<haxelib name="flxanimate" />
