@@ -35,12 +35,12 @@ import backend.Highscore;
 class Main extends Sprite
 {
 	public static final game = {
-		width: 0, // WINDOW width
-		height: 0, // WINDOW height
+		width: 1280, // WINDOW width
+		height: 720, // WINDOW height
 		initialState: TitleState, // initial game state
 		framerate: 60, // default framerate
 		skipSplash: true, // if the default flixel splash screen should be skipped
-		startFullscreen: true // if the game should start at fullscreen mode
+		startFullscreen: false // if the game should start at fullscreen mode
 	};
 
 	public static var fpsVar:FPSCounter;
@@ -152,7 +152,7 @@ class Main extends Sprite
 			FlxG.scaleMode = new MobileScaleMode();
 		});
 		#end
-		addChild(new FlxGame(0, 0, #if COPYSTATE_ALLOWED !CopyState.checkExistingFiles() ? CopyState : #end game.initialState, game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
+		addChild(new FlxGame(game.width, game.height, #if COPYSTATE_ALLOWED !CopyState.checkExistingFiles() ? CopyState : #end game.initialState, game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
 
 		fpsVar = new FPSCounter(10, 3, 0xFFFFFF);
 		addChild(fpsVar);
