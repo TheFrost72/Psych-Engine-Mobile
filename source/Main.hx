@@ -149,9 +149,21 @@ class Main extends Sprite
 		#if ACHIEVEMENTS_ALLOWED Achievements.load(); #end
 		#if mobile
         FlxG.signals.postGameStart.addOnce(() -> {
-        FlxG.scaleMode = new flixel.system.scaleModes.FillScaleMode();
+			var applyFill = function(w:Int, h:Int):Void {
+		    var scale:Float = Math.max(w / FlxG.width, h / FlxG.height);
+			for (cam in FlxG.cameras.list) {
+            if (cam == null) continue;
+            cam.flashSprite.scaleX = scale;
+            cam.flashSprite.scaleY = scale;
+            cam.setScale(scale, scale);
+        }
+        };
+        FlxG.signals.gameResized.add(function(w,h) {
+			applyFill(w,h);
 		});
-        #end
+        applyFill(Std.int(Lib.current.stage.stageWidth), Std.int(Lib.current.stage.stageHeight));
+		});
+	    #end
 		addChild(new FlxGame(game.width, game.height, #if COPYSTATE_ALLOWED !CopyState.checkExistingFiles() ? CopyState : #end game.initialState, game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
 
 		fpsVar = new FPSCounter(10, 3, 0xFFFFFF);
