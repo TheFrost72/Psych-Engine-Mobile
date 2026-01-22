@@ -40,7 +40,6 @@
 
 	<window width="1280" height="720" fps="60" background="#000000"
 	        hardware="true" vsync="false" allow-high-dpi="true" />
-
 	<window if="html5" resizable="true" />
 	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" vsync="false" />
 	<window if="mobile" orientation="landscape" fullscreen="true" resizable="false"
@@ -54,6 +53,11 @@
 	<set name="BUILD_DIR" value="export/32bit" if="32bits" />
 
 	<config:android minimum-sdk-version="21" target-sdk-version="33" />
+	<config:android section="application" attr:android:appCategory="game" />
+	<config:android section="application" attr:android:isGame="true" />
+	<android section="application">
+		<meta-data android:name="android.game_mode_config" android:resource="@xml/game_mode_config" />
+	</android>
 	<android permission="android.permission.MANAGE_EXTERNAL_STORAGE" />
 	<android permission="android.permission.READ_EXTERNAL_STORAGE" />
 	<android permission="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -151,7 +155,7 @@
 
 	<haxeflag name="--macro" value="allowPackage('flash')" />
 	<haxeflag name="--macro" value="include('my.pack')" />
-
+		
 	<haxedef name="hscriptPos" if="HSCRIPT_ALLOWED" />
 
 	<!-- _________________________________ Icons _______________________________ -->
