@@ -20,8 +20,8 @@ haxelib install SScript 8.1.6 --skip-dependencies --quiet
 
 haxelib git linc_luajit https://github.com/superpowers04/linc_luajit.git --skip-dependencies --quiet
 haxelib git flxanimate https://github.com/Dot-Stuff/flxanimate --skip-dependencies --quiet
-haxelib git funkin.vis https://github.com/FunkinCrew/funkVis 22b1ce089dd924f15cdc4632397ef3504d464e90 --skip-dependencies --quiet
-haxelib git grig.audio https://gitlab.com/haxe-grig/grig.audio.git --quiet
+haxelib git funkin.vis https://github.com/FunkinCrew/funkVis 22b1ce089dd924f15cdc4632397ef3504d464e90 --quiet --skip-dependencies
+haxelib git grig.audio https://gitlab.com/haxe-grig/grig.audio.git cbf91e2180fd2e374924fe74844086aab7891666 --quiet
 haxelib git extension-androidtools https://github.com/Neuro-Engine-Team/extension-androidtools --skip-dependencies --quiet
 
 echo "Libraries installed successfully"
