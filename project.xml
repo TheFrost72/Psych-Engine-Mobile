@@ -3,7 +3,7 @@
 
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="Friday Night Funkin' Neuro Engine"
+	<app title="Friday Night Funkin': Neuro Engine"
 	     file="NeuroEngine"
 	     packageName="com.thefrost72.neuroengine"
 	     package="com.thefrost72.neuroengine"
