@@ -39,10 +39,8 @@ class PauseButton extends FlxGroup
 		add(animSpr);
 	}
 
-	override public function update(elapsed:Float)
+	public function updateButton(elapsed:Float)
 	{
-		super.update(elapsed);
-
 		if (isPausing) return;
 
 		if (FlxG.mouse.justPressed && animSpr.overlapsPoint(FlxG.mouse.getWorldPosition(cam)))
@@ -64,10 +62,6 @@ class PauseButton extends FlxGroup
 	public function onResume()
 	{
 		isPausing = false;
-
-		animSpr.animation.stop();
-		animSpr.animation.setFrame(0);
-
 		staticSpr.alpha = 0;
 		animSpr.alpha = 0;
 
