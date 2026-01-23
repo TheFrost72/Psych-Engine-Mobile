@@ -2,18 +2,19 @@ package mobile.objects;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.group.FlxTypedGroup;
+import flixel.FlxCamera;
+import flixel.group.FlxGroup;
 import flixel.tweens.FlxTween;
 import states.PlayState;
 
-class PauseButton extends FlxTypedGroup<FlxSprite>
+class PauseButton extends FlxGroup
 {
 	var staticSpr:FlxSprite;
 	var animSpr:FlxSprite;
 	var isPausing:Bool = false;
-	var cam;
+	var cam:FlxCamera;
 
-	public function new(camHUD)
+	public function new(camHUD:FlxCamera)
 	{
 		super();
 		cam = camHUD;
@@ -51,7 +52,8 @@ class PauseButton extends FlxTypedGroup<FlxSprite>
 			FlxTween.tween(animSpr, {alpha: 0}, 0.5, {
 				onComplete: function(_)
 				{
-					PlayState.instance.openPauseMenu();
+					var fn = Reflect.field(PlayState.instance, "openPauseMenu");
+					if (fn != null) Reflect.callMethod(PlayState.instance, fn, []);
 				}
 			});
 		}
