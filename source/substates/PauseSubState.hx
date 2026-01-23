@@ -267,6 +267,7 @@ class PauseSubState extends MusicBeatSubstate
 			{
 				case "Resume":
 					Paths.clearUnusedMemory();
+					PlayState.instance.pauseButton.onResume();
 					close();
 				case 'Change Difficulty':
 					menuItems = difficultyChoices;
