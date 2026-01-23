@@ -13,7 +13,7 @@ import states.TitleState;
 import crowplexus.iris.Iris;
 import psychlua.HScript.HScriptInfos;
 #end
-//import mobile.backend.MobileScaleMode;
+import mobile.backend.MobileScaleMode;
 import openfl.events.KeyboardEvent;
 import lime.system.System as LimeSystem;
 
