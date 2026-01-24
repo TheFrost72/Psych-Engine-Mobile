@@ -1,0 +1,258 @@
+import lime.tools.Project;
+import lime.tools.Platform;
+
+class ProjectConfig extends Project {
+	public function new() {
+		super();
+
+		configureApp();
+		configureDefines();
+		configureWindow();
+		configurePaths();
+		configureAndroid();
+		configureAssets();
+		configureLibraries();
+		configureHaxe();
+		configureIcons();
+	}
+
+	// -------------------------------------------------------------------------
+	// App
+	// -------------------------------------------------------------------------
+	function configureApp() {
+		app = {
+			title: "Friday Night Funkin': Neuro Engine",
+			file: "NeuroEngine",
+			packageName: "com.thefrost72.neuroengine",
+			package: "com.thefrost72.neuroengine",
+			main: "Main",
+			version: "0.2.8",
+			company: "ShadowMario",
+			preloader: "flixel.system.FlxPreloader"
+		};
+
+		set("APP_ID", "0x0100f6c013bbc000");
+		set("SWF_VERSION", "11.8");
+
+		setHaxedef("LINC_LUA_RELATIVE_DYNAMIC_LIB");
+	}
+
+	// -------------------------------------------------------------------------
+	// Defines (Psych Engine)
+	// -------------------------------------------------------------------------
+	function configureDefines() {
+		if (isDesktop() || isMobile()) {
+			setDefine("MODS_ALLOWED");
+			setDefine("HSCRIPT_ALLOWED");
+			setDefine("LUA_ALLOWED");
+			setDefine("VIDEOS_ALLOWED");
+		}
+
+		setDefine("ACHIEVEMENTS_ALLOWED");
+		setDefine("TRANSLATIONS_ALLOWED");
+		setDefine("COPYSTATE_ALLOWED", defines.exists("MODS_ALLOWED") || isMobile());
+		setDefine("IRIS_DEBUG");
+		setDefine("TITLE_SCREEN_EASTER_EGG");
+		setDefine("SHOW_LOADING_SCREEN");
+		setDefine("PSYCH_WATERMARKS");
+		setDefine("BASE_GAME_FILES");
+
+		if (isDesktop()) setDefine("DISCORD_ALLOWED");
+		if (isCPP()) setDefine("MULTITHREADED_LOADING");
+
+		if (defines.exists("officialBuild")) {
+			setDefine("CHECK_FOR_UPDATES");
+		}
+
+		if (defines.exists("32bits")) {
+			setDefine("x86_BUILD");
+		}
+	}
+
+	// -------------------------------------------------------------------------
+	// Window
+	// -------------------------------------------------------------------------
+	function configureWindow() {
+		window = {
+			width: 0,
+			height: 0,
+			fps: 60,
+			background: 0x000000,
+			hardware: true,
+			vsync: false,
+			allowHighDPI: true
+		};
+
+		if (isHTML5()) window.resizable = true;
+
+		if (isDesktop()) {
+			window.orientation = LANDSCAPE;
+			window.fullscreen = false;
+			window.resizable = true;
+		}
+
+		if (isMobile()) {
+			window.orientation = LANDSCAPE;
+			window.fullscreen = true;
+			window.resizable = false;
+			window.allowShaders = true;
+			window.requireShaders = true;
+		}
+
+		if (platform == SWITCH) {
+			window.orientation = LANDSCAPE;
+			window.fullscreen = true;
+			window.resizable = true;
+		}
+	}
+
+	// -------------------------------------------------------------------------
+	// Paths
+	// -------------------------------------------------------------------------
+	function configurePaths() {
+		if (defines.exists("debug")) {
+			set("BUILD_DIR", "export/debug");
+		} else if (defines.exists("32bits")) {
+			set("BUILD_DIR", "export/32bit");
+		} else {
+			set("BUILD_DIR", "export/release");
+		}
+
+		addSource("source");
+	}
+
+	// -------------------------------------------------------------------------
+	// Android
+	// -------------------------------------------------------------------------
+	function configureAndroid() {
+		config.android = {
+			minimumSdkVersion: 25,
+			targetSdkVersion: 35
+		};
+
+		androidPermission("android.permission.MANAGE_EXTERNAL_STORAGE");
+		androidPermission("android.permission.READ_EXTERNAL_STORAGE");
+		androidPermission("android.permission.WRITE_EXTERNAL_STORAGE");
+
+		certificate({
+			path: "key.keystore",
+			password: "psychengine",
+			alias: "psychport",
+			aliasPassword: "psychengine",
+			if: "android",
+			unless: "debug"
+		});
+	}
+
+	// -------------------------------------------------------------------------
+	// Assets
+	// -------------------------------------------------------------------------
+	function configureAssets() {
+		addAsset("assets/fonts");
+		addAsset("assets/shared", { exclude: "*.mp3" });
+
+		addAsset("assets/base_game/songs", { rename: "assets/songs", exclude: "*.mp3" });
+		if (!isWeb()) addAsset("assets/songs", { exclude: "*.mp3" });
+
+		if (!isWeb()) addAsset("assets/embed", { embed: true, exclude: "*.mp3" });
+
+		addAsset("assets/base_game/shared", { rename: "assets/shared", exclude: "*.mp3" });
+		addAsset("assets/base_game/videos", { rename: "assets/videos" });
+
+		for (week in ["week1","week2","week3","week4","week5","week6","week7","weekend1"]) {
+			addAsset('assets/base_game/$week', { rename: 'assets/$week' });
+		}
+
+		if (!isWeb()) addAsset("assets/week_assets", { rename: "assets", exclude: "*.mp3" });
+
+		addAsset("assets/secrets", { rename: "assets/shared", exclude: "*.mp3" });
+
+		if (defines.exists("TRANSLATIONS_ALLOWED")) {
+			addAsset("assets/translations", { rename: "assets", exclude: "*.mp3" });
+		}
+
+		if (defines.exists("MODS_ALLOWED")) {
+			addAsset("example_mods", { rename: "mods", embed: false });
+			addAsset("list.txt", { rename: "modsList.txt" });
+		}
+
+		if (!isMobile()) {
+			addAsset("art/readme.txt", { rename: "do NOT readme.txt" });
+		}
+
+		if (isDesktop()) {
+			if (isWindows()) {
+				addAsset("alsoft.txt", { rename: "plugins/alsoft.ini", type: "text" });
+			} else {
+				addAsset("alsoft.txt", { rename: "plugins/alsoft.conf", type: "text" });
+			}
+		}
+	}
+
+	// -------------------------------------------------------------------------
+	// Libraries
+	// -------------------------------------------------------------------------
+	function configureLibraries() {
+		includeLib("flixel");
+		includeLib("flixel-addons");
+		includeLib("flxanimate");
+		includeLib("tjson");
+		includeLib("extension-androidtools");
+
+		if (defines.exists("LUA_ALLOWED")) includeLib("linc_luajit");
+		if (defines.exists("HSCRIPT_ALLOWED")) includeLib("hscript-iris", "1.1.3");
+		if (defines.exists("VIDEOS_ALLOWED")) includeLib("hxvlc");
+		if (defines.exists("DISCORD_ALLOWED")) includeLib("hxdiscord_rpc");
+
+		if (defines.exists("debug")) includeLib("hxcpp-debug-server");
+	}
+
+	// -------------------------------------------------------------------------
+	// Haxe / HXCPP
+	// -------------------------------------------------------------------------
+	function configureHaxe() {
+		setHaxedef("DISCORD_DISABLE_IO_THREAD", defines.exists("hxdiscord_rpc"));
+		setHaxedef("NO_PRECOMPILED_HEADERS", isLinux());
+
+		setHaxedef("HXC_LIBVLC_LOGGING", defines.exists("VIDEOS_ALLOWED") || defines.exists("debug"));
+		setHaxedef("HXVLC_NO_SHARE_DIRECTORY", defines.exists("VIDEOS_ALLOWED"));
+		setHaxedef("HXVLC_EXPERIMENTAL_WINDOWSARM", isWindows() || defines.exists("HXCPP_ARM64"));
+
+		setHaxedef("FLX_NO_FOCUS_LOST_SCREEN");
+		setHaxedef("HXC_DEBUG_TRACE", defines.exists("debug"));
+		setHaxedef("FLX_NO_DEBUG", !defines.exists("debug"));
+		setHaxedef("NAPE_RELEASE_BUILD", !defines.exists("debug"));
+		setHaxedef("ANDROID_SET_EXTERNAL_STORAGE_PERMISSION");
+
+		if (isCPP()) {
+			setHaxedef("HXCPP_CHECK_POINTER");
+			setHaxedef("HXCPP_STACK_LINE");
+			setHaxedef("HXCPP_STACK_TRACE");
+			setHaxedef("HXCPP_CATCH_SEGV");
+		}
+
+		setHaxedef("no-deprecation-warnings");
+		setHaxedef("message.reporting", "pretty");
+
+		addHaxeFlag("--macro allowPackage('flash')");
+		addHaxeFlag("--macro include('my.pack')");
+
+		if (defines.exists("HSCRIPT_ALLOWED")) {
+			setHaxedef("hscriptPos");
+		}
+	}
+
+	// -------------------------------------------------------------------------
+	// Icons
+	// -------------------------------------------------------------------------
+	function configureIcons() {
+		if (isLinux() || isMac()) {
+			addAsset("art/icons/iconOG.png", { rename: "icon.png" });
+		}
+
+		addIcon("art/icons/icon16.png", 16);
+		addIcon("art/icons/icon32.png", 32);
+		addIcon("art/icons/icon64.png", 64);
+		addIcon("art/icons/iconOG.png");
+	}
+}
