@@ -69,14 +69,14 @@
 	<assets path="assets/embed" exclude="*.mp3" embed="true" />
 	<assets path="assets/base_game/shared" rename="assets/shared" exclude="*.mp3" />
 	<assets path="assets/base_game/videos" rename="assets/videos" />
-	<assets path="assets/base_game/week1" rename="assets/week1" />
-	<assets path="assets/base_game/week2" rename="assets/week2" />
-	<assets path="assets/base_game/week3" rename="assets/week3" />
-	<assets path="assets/base_game/week4" rename="assets/week4" />
-	<assets path="assets/base_game/week5" rename="assets/week5" />
-	<assets path="assets/base_game/week6" rename="assets/week6" />
-	<assets path="assets/base_game/week7" rename="assets/week7" />
-	<assets path="assets/base_game/weekend1" rename="assets/weekend1" />
+	<assets path="assets/base_game/week1" rename="assets/week1" exclude="*.mp3" />
+	<assets path="assets/base_game/week2" rename="assets/week2" exclude="*.mp3" />
+	<assets path="assets/base_game/week3" rename="assets/week3" exclude="*.mp3" />
+	<assets path="assets/base_game/week4" rename="assets/week4" exclude="*.mp3" />
+	<assets path="assets/base_game/week5" rename="assets/week5" exclude="*.mp3" />
+	<assets path="assets/base_game/week6" rename="assets/week6" exclude="*.mp3" />
+	<assets path="assets/base_game/week7" rename="assets/week7" exclude="*.mp3" />
+	<assets path="assets/base_game/weekend1" rename="assets/weekend1" exclude="*.mp3" />
 	<assets path="assets/week_assets" rename="assets" exclude="*.mp3" />
 	<assets path="assets/secrets" rename="assets/shared" exclude="*.mp3" />
 
