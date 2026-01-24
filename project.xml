@@ -3,7 +3,7 @@
 
 	<!-- App -->
 	<app
-		title="FNF': Neuro Engine"
+		title="FNF: Neuro Engine"
 		file="NeuroEngine"
 		main="Main"
 		version="0.2.8"
