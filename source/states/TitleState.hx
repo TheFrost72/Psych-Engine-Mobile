@@ -132,6 +132,7 @@ class TitleState extends MusicBeatState
 		logoBl = new FlxSprite(logoPosition.x, logoPosition.y);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 		logoBl.antialiasing = ClientPrefs.data.antialiasing;
+		logoBl.scale.set(1.2, 1.2);
 
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
@@ -139,6 +140,7 @@ class TitleState extends MusicBeatState
 
 		gfDance = new FlxSprite(gfPosition.x, gfPosition.y);
 		gfDance.antialiasing = ClientPrefs.data.antialiasing;
+		gfDance.scale.set(1.2, 1.2);
 		
 		if(ClientPrefs.data.shaders)
 		{
@@ -164,6 +166,7 @@ class TitleState extends MusicBeatState
 		var animFrames:Array<FlxFrame> = [];
 		titleText = new FlxSprite(enterPosition.x, enterPosition.y);
 		titleText.frames = Paths.getSparrowAtlas('titleEnter');
+		titleText.scale.set(1.2, 1.2);
 		@:privateAccess
 		{
 			titleText.animation.findByPrefix(animFrames, "ENTER IDLE");
@@ -217,9 +220,9 @@ class TitleState extends MusicBeatState
 	var characterImage:String = 'gfDanceTitle';
 	var animationName:String = 'gfDance';
 
-	var gfPosition:FlxPoint = FlxPoint.get(512, 40);
-	var logoPosition:FlxPoint = FlxPoint.get(-150, -100);
-	var enterPosition:FlxPoint = FlxPoint.get(60, 576);
+	var gfPosition:FlxPoint = FlxPoint.get(870, 80);
+	var logoPosition:FlxPoint = FlxPoint.get(-40, -50);
+	var enterPosition:FlxPoint = FlxPoint.get(270, 650);
 	
 	var useIdle:Bool = false;
 	var musicBPM:Float = 102;
