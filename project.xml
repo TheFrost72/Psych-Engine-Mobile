@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+
+	<!-- _________________________ Application Settings _________________________ -->
+
+	<app title="Friday Night Funkin': Neuro Engine"
+	     file="NeuroEngine"
+	     packageName="com.thefrost72.neuroengine"
+	     package="com.thefrost72.neuroengine"
+	     main="Main"
+	     version="0.2.8"
+	     company="ShadowMario" />
+
+	<set name="APP_ID" value="0x0100f6c013bbc000" />
+
+	<haxedef name="LINC_LUA_RELATIVE_DYNAMIC_LIB" />
+
+	<app preloader="flixel.system.FlxPreloader" />
+
+	<set name="SWF_VERSION" value="11.8" />
+
+	<!-- ______________________ PSYCH ENGINE CUSTOMIZATION ______________________ -->
+
+	<define name="MODS_ALLOWED" if="desktop || mobile" />
+	<define name="HSCRIPT_ALLOWED" if="desktop || mobile" />
+	<define name="LUA_ALLOWED" if="desktop || mobile" />
+	<define name="ACHIEVEMENTS_ALLOWED" />
+	<define name="DISCORD_ALLOWED" if="desktop" />
+	<define name="TRANSLATIONS_ALLOWED" />
+	<define name="COPYSTATE_ALLOWED" if="MODS_ALLOWED || mobile" />
+	<define name="IRIS_DEBUG" />
+	<define name="TITLE_SCREEN_EASTER_EGG" />
+	<define name="VIDEOS_ALLOWED" if="desktop || mobile" unless="32bits" />
+	<define name="MULTITHREADED_LOADING" if="cpp" />
+	<define name="SHOW_LOADING_SCREEN" />
+	<define name="PSYCH_WATERMARKS" />
+	<define name="BASE_GAME_FILES" />
+
+	<!-- ____________________________ Window Settings ___________________________ -->
+
+	<window width="0" height="0" fps="60" background="#000000"
+	        hardware="true" vsync="false" allow-high-dpi="true" />
+	<window if="html5" resizable="true" />
+	<window if="desktop" orientation="landscape" fullscreen="false" resizable="true" vsync="false" />
+	<window if="mobile" orientation="landscape" fullscreen="true" resizable="false"
+	        allow-shaders="true" require-shaders="true" />
+	<window if="switch" orientation="landscape" fullscreen="true" width="0" height="0" resizable="true" />
+
+	<!-- _____________________________ Path Settings ____________________________ -->
+
+	<set name="BUILD_DIR" value="export/debug" if="debug" />
+	<set name="BUILD_DIR" value="export/release" unless="debug" />
+	<set name="BUILD_DIR" value="export/32bit" if="32bits" />
+
+	//old 21 and 33
+	<config:android minimum-sdk-version="25" target-sdk-version="35" />
+	<android permission="android.permission.MANAGE_EXTERNAL_STORAGE" />
+	<android permission="android.permission.READ_EXTERNAL_STORAGE" />
+	<android permission="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+	<classpath name="source" />
+
+	<!-- __________________________ Game Assets & Etc. __________________________ -->
+
+	<assets path="assets/fonts" />
+	<assets path="assets/shared" exclude="*.mp3" />
+	<assets path="assets/base_game/songs" exclude="*.mp3" rename="assets/songs" />
+	<assets path="assets/songs" exclude="*.mp3" unless="web" />
+	<assets path="assets/embed" exclude="*.mp3" unless="web" embed="true" />
+	<assets path="assets/base_game/shared" rename="assets/shared" exclude="*.mp3" />
+	<assets path="assets/base_game/videos" rename="assets/videos" />
+	<assets path="assets/base_game/week1" rename="assets/week1" />
+	<assets path="assets/base_game/week2" rename="assets/week2" />
+	<assets path="assets/base_game/week3" rename="assets/week3" />
+	<assets path="assets/base_game/week4" rename="assets/week4" />
+	<assets path="assets/base_game/week5" rename="assets/week5" />
+	<assets path="assets/base_game/week6" rename="assets/week6" />
+	<assets path="assets/base_game/week7" rename="assets/week7" />
+	<assets path="assets/base_game/weekend1" rename="assets/weekend1" />
+	<assets path="assets/week_assets" rename="assets" exclude="*.mp3" unless="web" />
+	<assets path="assets/secrets" rename="assets/shared" exclude="*.mp3" />
+
+	<section if="TRANSLATIONS_ALLOWED">
+		<assets path="assets/translations" rename="assets" exclude="*.mp3" />
+	</section>
+
+	<define name="CHECK_FOR_UPDATES" if="officialBuild" />
+
+	<section if="MODS_ALLOWED">
+		<assets path="example_mods" rename="mods" embed="false" />
+		<assets path="list.txt" rename="modsList.txt" />
+	</section>
+
+	<assets path="art/readme.txt" rename="do NOT readme.txt" unless="mobile" />
+
+	<section if="desktop">
+		<assets path="alsoft.txt" rename="plugins/alsoft.ini" type="text" if="windows" />
+		<assets path="alsoft.txt" rename="plugins/alsoft.conf" type="text" unless="windows" />
+	</section>
+
+	<!-- _______________________________ Libraries ______________________________ -->
+
+	<haxelib name="flixel" />
+	<haxelib name="flixel-addons" />
+     <haxelib name="linc_luajit" if="LUA_ALLOWED"/>
+	<haxelib name="hscript-iris" if="HSCRIPT_ALLOWED" version="1.1.3"/>
+	<haxelib name="hxvlc" if="VIDEOS_ALLOWED" />
+	<haxelib name="hxdiscord_rpc" if="DISCORD_ALLOWED" />
+	<haxelib name="flxanimate" />
+	<haxelib name="tjson" />
+	<haxelib name="extension-androidtools" />
+
+	<haxedef name="DISCORD_DISABLE_IO_THREAD" if="hxdiscord_rpc" />
+	<haxedef name="NO_PRECOMPILED_HEADERS" if="linux" />
+
+	<haxelib name="hxcpp-debug-server" if="debug" />
+	<haxedef name="HXC_LIBVLC_LOGGING" if="VIDEOS_ALLOWED || debug" />
+	<haxedef name="HXVLC_NO_SHARE_DIRECTORY" if="VIDEOS_ALLOWED" />
+	<haxedef name="HXVLC_EXPERIMENTAL_WINDOWSARM" if="windows || HXCPP_ARM64" />
+	<define name="x86_BUILD" if="32bits" />
+
+	<haxedef name="FLX_NO_FOCUS_LOST_SCREEN" />
+	<haxedef name="HXC_DEBUG_TRACE" if="debug" />
+	<haxedef name="FLX_NO_DEBUG" unless="debug" />
+	<haxedef name="NAPE_RELEASE_BUILD" unless="debug" />
+	<haxedef name="ANDROID_SET_EXTERNAL_STORAGE_PERMISSION" />
+
+	<section if="cpp">
+		<haxedef name="HXCPP_CHECK_POINTER" />
+		<haxedef name="HXCPP_STACK_LINE" />
+		<haxedef name="HXCPP_STACK_TRACE" />
+		<haxedef name="HXCPP_CATCH_SEGV" />
+	</section>
+
+	<haxedef name="no-deprecation-warnings" />
+	<haxedef name="message.reporting" value="pretty" />
+
+	<certificate path="key.keystore"
+	             password="psychengine"
+	             alias="psychport"
+	             alias-password="psychengine"
+	             if="android"
+	             unless="debug" />
+
+	<launchStoryboard path="LaunchScreen.storyboard" />
+	<config:ios category_type="public.app-category.music-games" />
+	<config:mac category_type="public.app-category.music-games" />
+
+	<haxedef name="SHARE_MOBILE_FILES" if="ios" />
+
+	<haxeflag name="--macro" value="allowPackage('flash')" />
+	<haxeflag name="--macro" value="include('my.pack')" />
+		
+	<haxedef name="hscriptPos" if="HSCRIPT_ALLOWED" />
+
+	<!-- _________________________________ Icons _______________________________ -->
+
+	<assets path="art/icons/iconOG.png" rename="icon.png" if="linux || mac" />
+
+	<icon path="art/icons/icon16.png" size="16" />
+	<icon path="art/icons/icon32.png" size="32" />
+	<icon path="art/icons/icon64.png" size="64" />
+	<icon path="art/icons/iconOG.png" />
+
+</project>
