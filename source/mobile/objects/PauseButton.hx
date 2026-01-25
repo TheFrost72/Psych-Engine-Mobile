@@ -22,7 +22,7 @@ class PauseButton extends FlxGroup
 		staticSpr = new FlxSprite();
 		staticSpr.loadGraphic(Paths.image("pauseCircle"));
 		staticSpr.cameras = [cam];
-		staticSpr.scale.set(0.75, 0.75);
+		staticSpr.scale.set(0.8, 0.8);
 		staticSpr.x = FlxG.width - staticSpr.width + 34;
 		staticSpr.y = -32;
 		staticSpr.alpha = 0.2;
