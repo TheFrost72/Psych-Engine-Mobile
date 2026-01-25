@@ -41,7 +41,7 @@ class AchievementsMenuState extends MusicBeatState
 		add(camFollow);
 
 		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue'));
-		var scale = Math.max(FlxG.width / bg.width, FlxG.height / bg.height);
+		var scale = Math.max(FlxG.width / menuBG.width, FlxG.height / menuBG.height);
 		menuBG.antialiasing = ClientPrefs.data.antialiasing;
 		menuBG.scale.set(scale, scale);
 		menuBG.updateHitbox();
