@@ -56,8 +56,10 @@ class NotesColorSubState extends MusicBeatSubstate
 		
 		onPixel = PlayState.isPixelStage;
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		var scale = Math.max(FlxG.width / bg.width, FlxG.height / bg.height);
 		bg.color = 0xFFEA71FD;
 		bg.screenCenter();
+		bg.scale.set(scale, scale);
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		add(bg);
 
