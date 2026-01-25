@@ -44,11 +44,12 @@
 	<window if="html5" resizable="true" />
 
 	<!-- Android -->
-	<config:android minimum-sdk-version="28" target-sdk-version="33" />
-	<android permission="android.permission.MANAGE_EXTERNAL_STORAGE" />
-	<android permission="android.permission.READ_EXTERNAL_STORAGE" />
-	<android permission="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<config:android minimum-sdk-version="28" target-sdk-version="33" if="android" />
+	<android permission="android.permission.MANAGE_EXTERNAL_STORAGE" if="android" />
+	<android permission="android.permission.READ_EXTERNAL_STORAGE" if="android" />
+	<android permission="android.permission.WRITE_EXTERNAL_STORAGE" if="android" />
 	<config:android display-cutout="shortEdges" if="android" />
+	<template path="templates/android/AndroidManifest.xml" rename="app/src/main/AndroidManifest.xml" if="android" />
 
 	<classpath name="source" />
 
