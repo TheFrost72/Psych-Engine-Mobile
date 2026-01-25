@@ -31,6 +31,8 @@ import flixel.util.FlxSignal.FlxTypedSignal;
 @:access(mobile.objects.TouchButton)
 class TouchPad extends MobileInputManager implements IMobileControls
 {
+	static inline var BASE_WIDTH:Int  = 1280;
+	static inline var BASE_HEIGHT:Int = 720;
 	public var buttonLeft:TouchButton = new TouchButton(0, 0, [MobileInputID.LEFT, MobileInputID.NOTE_LEFT]);
 	public var buttonUp:TouchButton = new TouchButton(0, 0, [MobileInputID.UP, MobileInputID.NOTE_UP]);
 	public var buttonRight:TouchButton = new TouchButton(0, 0, [MobileInputID.RIGHT, MobileInputID.NOTE_RIGHT]);
@@ -185,12 +187,17 @@ class TouchPad extends MobileInputManager implements IMobileControls
 
 	private function createButton(X:Float, Y:Float, Graphic:String, ?Color:FlxColor = 0xFFFFFF, ?IDs:Array<MobileInputID>):TouchButton
 	{
-		var button = new TouchButton(X, Y, IDs);
+		var scale:Float = Math.min(FlxG.width  / BASE_WIDTH, FlxG.height / BASE_HEIGHT);
+		var offsetX:Float = (FlxG.width  - BASE_WIDTH  * scale) * 0.5;
+		var offsetY:Float = (FlxG.height - BASE_HEIGHT * scale) * 0.5;
+		var realX:Float = X * scale + offsetX;
+		var realY:Float = Y * scale + offsetY;
+		var button = new TouchButton(realX, realY, IDs);
 		button.label = new FlxSprite();
 		button.loadGraphic(Paths.image('touchpad/bg', "mobile"));
 		button.label.loadGraphic(Paths.image('touchpad/${Graphic.toUpperCase()}', "mobile"));
 
-		button.scale.set(0.243, 0.243);
+		button.scale.set(0.243 * scale, 0.243 * scale);
 		button.updateHitbox();
 		button.updateLabelPosition();
 
