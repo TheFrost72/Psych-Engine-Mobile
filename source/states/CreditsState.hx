@@ -25,9 +25,9 @@ class CreditsState extends MusicBeatState
 		#end
 
 		persistentUpdate = true;
-		var scale = Math.max(FlxG.width / bg.width, FlxG.height / bg.height);
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.antialiasing = ClientPrefs.data.antialiasing;
+		var scale = Math.max(FlxG.width / bg.width, FlxG.height / bg.height);
 		bg.scale.set(scale, scale);
 		add(bg);
 		bg.screenCenter();
