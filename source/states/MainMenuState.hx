@@ -1,4 +1,4 @@
-lpackage states;
+package states;
 
 import flixel.FlxObject;
 import flixel.effects.FlxFlicker;
