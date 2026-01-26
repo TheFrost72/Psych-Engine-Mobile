@@ -21,9 +21,6 @@ class MainMenuState extends MusicBeatState
 	public static var neuroEngineVersion:String = '0.1.0';
 	public static var curColumn:MainMenuColumn = CENTER;
 	var allowMouse:Bool = true; //Turn this off to block mouse movement in menus
-	var scaleX:Float = FlxG.width / baseW;
-	var scaleY:Float = FlxG.height / originBase;
-	var uiScale:Float = Math.min(scaleX, scaleY);
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	var leftItem:FlxSprite;
@@ -87,6 +84,9 @@ class MainMenuState extends MusicBeatState
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
+		var scaleX:Float = FlxG.width / baseW;
+		var scaleY:Float = FlxG.height / originBase;
+		var uiScale:Float = Math.min(scaleX, scaleY);
 		for (num => option in optionShit)
 		{
 			var item:FlxSprite = createMenuItem(option, 0, ((num * 140) + 90) * scaleY);
@@ -114,7 +114,7 @@ class MainMenuState extends MusicBeatState
 		add(psychVer);
 		var fnfVer:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
 		fnfVer.scrollFactor.set();
-		fnfVer.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		fnfVer.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHTE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(fnfVer);
 		changeItem();
 
