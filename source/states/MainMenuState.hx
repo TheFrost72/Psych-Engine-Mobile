@@ -14,14 +14,16 @@ enum MainMenuColumn {
 
 class MainMenuState extends MusicBeatState
 {
-	static inline var BASE_W:Int = 1280;
-	static inline var BASE_H:Int = 720;
+	static inline var originBase:Int = 720;
+	static inline var baseW:Int = 1280;
 	public static var psychEngineVersion:String = '1.0.4'; // This is also used for Discord RPC
 	public static var curSelected:Int = 0;
 	public static var neuroEngineVersion:String = '0.1.0';
 	public static var curColumn:MainMenuColumn = CENTER;
 	var allowMouse:Bool = true; //Turn this off to block mouse movement in menus
-	var uiScale:Float = Math.min(FlxG.width / BASE_W, FlxG.height / BASE_H);
+	var scaleX:Float = FlxG.width / baseW;
+	var scaleY:Float = FlxG.height / originBase;
+	var uiScale:Float = Math.min(scaleX, scaleY);
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	var leftItem:FlxSprite;
@@ -87,11 +89,11 @@ class MainMenuState extends MusicBeatState
 
 		for (num => option in optionShit)
 		{
-			var extraY = (FlxG.height - 720 * uiScale) / 2;
-			var item:FlxSprite = createMenuItem(option, 0, ((num * 140) + 90) * uiScale + extraY);
-			item.y += (4 - optionShit.length) * 70 * uiScale; // Offsets for when you have anything other than 4 items
-			item.scale.set(uiScale, uiScale);
+			var item:FlxSprite = createMenuItem(option, 0, ((num * 140) + 90) * scaleY);
+			item.y += (4 - optionShit.length) * 70 * scaleY; // Offsets for when you have anything other than 4 items
+			item.scale.set(uiScale * 0.9, uiScale * 0.9);
 			item.screenCenter(X);
+			item.updateHitbox();
 		}
 
 		if (leftOption != null)
