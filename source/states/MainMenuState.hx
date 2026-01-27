@@ -93,8 +93,8 @@ class MainMenuState extends MusicBeatState
 			item.y += (4 - optionShit.length) * 70 * scaleY; // Offsets for when you have anything other than 4 items
 			item.scale.set(uiScale, uiScale);
 			item.screenCenter(X);
-			item.x -= 20 * uiScale;
-			item.y -= 13 * uiScale;
+			item.x -= 23 * uiScale;
+			item.y -= 16 * uiScale;
 			item.updateHitbox();
 		}
 
