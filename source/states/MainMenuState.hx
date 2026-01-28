@@ -397,8 +397,7 @@ class MainMenuState extends MusicBeatState
 			case LEFT:
 				selectedItem = leftItem;
 			case LEFT2:
-				selectedItem = left2
-				Item;
+				selectedItem = left2Item;
 		}
 		selectedItem.animation.play('selected');
 		selectedItem.centerOffsets();
