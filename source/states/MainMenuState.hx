@@ -209,7 +209,7 @@ class MainMenuState extends MusicBeatState
 						changeItem();
 					}
 				}
-				else if(left2Item != null && FlxG.mouse.overlaps(rightItem))
+				else if(left2Item != null && FlxG.mouse.overlaps(left2Item))
 				{
 					allowMouse = true;
 					if(selectedItem != left2Item)
