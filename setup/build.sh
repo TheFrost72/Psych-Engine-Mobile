@@ -8,7 +8,7 @@ echo "Installing dependencies..."
 echo "This might take a few moments depending on your internet speed."
 haxelib install hxcpp 4.3.2 --skip-dependencies --quiet
 haxelib git lime https://github.com/Neuro-Engine-Team/lime --skip-dependencies --quiet
-haxelib install openfl 9.3.3 --skip-dependencies --quiet
+haxelib git openfl https://github.com/Neuro-Engine-Team/openfl --skip-dependencies --quiet
 haxelib install flixel 5.6.1 --skip-dependencies --quiet
 haxelib install flixel-addons 3.2.2 --skip-dependencies --quiet
 haxelib install flixel-tools 1.5.1 --skip-dependencies --quiet
