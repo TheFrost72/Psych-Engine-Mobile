@@ -19,7 +19,6 @@ class BackButton extends FlxSprite
 
         frames = Paths.getSparrowAtlas('backButton');
         antialiasing = true;
-        cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 
         x = FlxG.width * 0.84;
         y = FlxG.height * 0.69;
@@ -39,6 +38,7 @@ class BackButton extends FlxSprite
         );
 
         animation.play('idle');
+        scrollFactor.set(0,0);
 
         updateHitbox();
         centerOffsets();
