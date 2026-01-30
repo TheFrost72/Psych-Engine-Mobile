@@ -1,4 +1,4 @@
-package objects;
+package mobile.objects;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
