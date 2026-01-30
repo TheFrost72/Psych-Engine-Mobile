@@ -667,11 +667,6 @@ class PlayState extends MusicBeatState
 		grpNoteSplashes.add(splash);
 		splash.alpha = 0.000001; //cant make it invisible or it won't allow precaching
 
-		#if !android
-		addTouchPad('NONE', 'P');
-		addTouchPadCamera();
-		#end
-
 		#if mobile
 		pauseButton = new PauseButton(camHUD);
 		add(pauseButton);
