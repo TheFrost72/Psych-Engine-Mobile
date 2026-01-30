@@ -5,7 +5,7 @@ import flixel.effects.FlxFlicker;
 import lime.app.Application;
 import states.editors.MasterEditorMenu;
 import options.OptionsState;
-import mobile.objects.BackButton
+import mobile.objects.BackButton;
 
 enum MainMenuColumn {
 	LEFT;
