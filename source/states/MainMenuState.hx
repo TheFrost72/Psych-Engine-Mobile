@@ -147,7 +147,7 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollow, null, 0.15);
 
-		backButton = new Backbutton();
+		backButton = new BackButton();
 		add(backButton);
 
 		addTouchPad('NONE', 'E');
