@@ -241,8 +241,12 @@ class ChartingState extends MusicBeatState implements PsychUIEventHandler.PsychU
 		chartEditorSave.bind('chart_editor_data', CoolUtil.getSavePath());
 
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		var scale = Math.max(FlxG.width / bg.width, FlxG.height / bg.height);
 		bg.antialiasing = ClientPrefs.data.antialiasing;
 		bg.scrollFactor.set();
+		bg.scale.set(scale, scale);
+		bg.updateHitbox();
+		bg.screenCenter();
 		add(bg);
 
 		if(chartEditorSave.data.autoSave != null) autoSaveCap = chartEditorSave.data.autoSave;
