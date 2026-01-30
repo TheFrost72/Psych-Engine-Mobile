@@ -116,7 +116,6 @@ class FreeplayState extends MusicBeatState
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
-		var scaleUi = Math.min(FlxG.height / 720, FlxG.width / 1280);
 		for (i in 0...songs.length)
 		{
 			var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
@@ -125,8 +124,6 @@ class FreeplayState extends MusicBeatState
 
 			songText.scaleX = Math.min(1, 980 / songText.width);
 			songText.snapToPosition();
-			songText.scale.set(songText.scale.x * scaleUi * 1.1, songText.scale.y * scaleUi * 1.1);
-			songText.updateHitbox();
 
 			Mods.currentModDirectory = songs[i].folder;
 			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
@@ -136,8 +133,6 @@ class FreeplayState extends MusicBeatState
 			// too laggy with a lot of songs, so i had to recode the logic for it
 			songText.visible = songText.active = songText.isMenuItem = false;
 			icon.visible = icon.active = false;
-			icon.scale.set(icon.scale.x * scaleUi * 1.1, icon.scale.y * scaleUi * 1.1);
-			icon.updateHitbox();
 
 			// using a FlxGroup is too much fuss!
 			iconArray.push(icon);
