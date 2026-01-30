@@ -5,6 +5,7 @@ import flixel.effects.FlxFlicker;
 import lime.app.Application;
 import states.editors.MasterEditorMenu;
 import options.OptionsState;
+import mobile.objects.BackButton
 
 enum MainMenuColumn {
 	LEFT;
@@ -25,6 +26,8 @@ class MainMenuState extends MusicBeatState
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	var leftItem:FlxSprite;
 	var rightItem:FlxSprite;
+
+	var backButton:BackButton;
 
 	//Centered/Text options
 	var optionShit:Array<String> = [
@@ -143,6 +146,9 @@ class MainMenuState extends MusicBeatState
 		#end
 
 		FlxG.camera.follow(camFollow, null, 0.15);
+
+		backButton = new Backbutton();
+		add(backButton);
 
 		addTouchPad('NONE', 'E');
 	}
@@ -276,7 +282,7 @@ class MainMenuState extends MusicBeatState
 					}
 			}
 
-			if (controls.BACK)
+			if (controls.BACK || backButton.wasPressed)
 			{
 				selectedSomethin = true;
 				FlxG.mouse.visible = false;
