@@ -6,8 +6,6 @@ import flixel.math.FlxPoint;
 
 class BackButton extends FlxSprite
 {
-    public var wasPressed:Bool = false;
-
     public function new()
     {
         super();
@@ -42,24 +40,5 @@ class BackButton extends FlxSprite
 
         updateHitbox();
         centerOffsets();
-    }
-
-    override public function update(elapsed:Float):Void
-    {
-        super.update(elapsed);
-
-        if (wasPressed)
-            return;
-
-        if (FlxG.mouse.justPressed)
-        {
-            var mousePos:FlxPoint = FlxG.mouse.getWorldPosition(cameras[0]);
-
-            if (overlapsPoint(mousePos))
-            {
-                wasPressed = true;
-                animation.play('confirm', true);
-            }
-        }
     }
 }
