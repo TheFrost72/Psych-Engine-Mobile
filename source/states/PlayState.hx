@@ -78,8 +78,6 @@ import crowplexus.hscript.Printer;
 **/
 class PlayState extends MusicBeatState
 {
-	public static inline var BASE_W:Float = 1280;
-	public static inline var BASE_H:Float = 720;
 	public static var STRUM_X = 42;
 	public static var STRUM_X_MIDDLESCROLL = -278;
 
@@ -133,8 +131,6 @@ class PlayState extends MusicBeatState
 	public static var uiPrefix:String = "";
 	public static var uiPostfix:String = "";
 	public static var isPixelStage(get, never):Bool;
-
-	public var baseZoom:Float = 1;
 
 	@:noCompletion
 	static function set_stageUI(value:String):String
@@ -678,11 +674,6 @@ class PlayState extends MusicBeatState
 
 		super.create();
 		Paths.clearUnusedMemory();
-
-		baseZoom = Math.min(
-			FlxG.width  / BASE_W,
-			FlxG.height / BASE_H
-		);
 
 		cacheCountdown();
 		cachePopUpScore();
