@@ -679,7 +679,10 @@ class PlayState extends MusicBeatState
 		super.create();
 		Paths.clearUnusedMemory();
 
-		baseZoom:Float = Math.min(FlxG.width / BASE_W, FlxG.height / BASE_H);
+		baseZoom = Math.min(
+			FlxG.width  / BASE_W,
+			FlxG.height / BASE_H
+		);
 
 		cacheCountdown();
 		cachePopUpScore();
