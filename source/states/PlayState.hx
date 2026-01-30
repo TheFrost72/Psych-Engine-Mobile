@@ -78,6 +78,8 @@ import crowplexus.hscript.Printer;
 **/
 class PlayState extends MusicBeatState
 {
+	public static inline var BASE_W:Float = 1280;
+	public static inline var BASE_H:Float = 720;
 	public static var STRUM_X = 42;
 	public static var STRUM_X_MIDDLESCROLL = -278;
 
@@ -131,6 +133,8 @@ class PlayState extends MusicBeatState
 	public static var uiPrefix:String = "";
 	public static var uiPostfix:String = "";
 	public static var isPixelStage(get, never):Bool;
+
+	public var baseZoom:Float = 1;
 
 	@:noCompletion
 	static function set_stageUI(value:String):String
@@ -674,6 +678,8 @@ class PlayState extends MusicBeatState
 
 		super.create();
 		Paths.clearUnusedMemory();
+
+		baseZoom:Float = Math.min(FlxG.width / BASE_W, FlxG.height / BASE_H);
 
 		cacheCountdown();
 		cachePopUpScore();
@@ -1805,7 +1811,7 @@ class PlayState extends MusicBeatState
 		if (camZooming)
 		{
 			FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom * ((FlxG.width / FlxG.height) / (1280.0 / 720.0)), FlxG.camera.zoom, Math.exp(-elapsed * 3.125 * camZoomingDecay * playbackRate));
-			camHUD.zoom = FlxMath.lerp(1, camHUD.zoom, Math.exp(-elapsed * 3.125 * camZoomingDecay * playbackRate));
+			camHUD.zoom = FlxMath.lerp(baseZoom, camHUD.zoom, Math.exp(-elapsed * 3.125 * camZoomingDecay * playbackRate));
 		}
 
 		FlxG.watch.addQuick("secShit", curSection);
