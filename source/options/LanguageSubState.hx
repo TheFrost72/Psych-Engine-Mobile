@@ -109,7 +109,7 @@ languages.push(ClientPrefs.defaultData.language); //English (US)
 	{
 		super.update(elapsed);
 
-		if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(backButton, FlxG.camera));
+		if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(backButton, FlxG.camera))
 		{
 			if(changedLanguage)
 			{
