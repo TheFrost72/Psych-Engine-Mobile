@@ -2,7 +2,7 @@ package options;
 
 import states.MainMenuState;
 import backend.StageData;
-import.mobile.objects.BackButton;
+import mobile.objects.BackButton;
 
 class OptionsState extends MusicBeatState
 {
