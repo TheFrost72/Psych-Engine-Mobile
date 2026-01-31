@@ -423,7 +423,7 @@ class NoteOffsetState extends MusicBeatState
 			FlxG.mouse.visible = false;
 		}
 
-		if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(backButton, FlxG.camera));
+		if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(backButton, FlxG.camera))
 		{
 			if(zoomTween != null) zoomTween.cancel();
 			if(beatTween != null) beatTween.cancel();
