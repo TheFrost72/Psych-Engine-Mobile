@@ -2,6 +2,7 @@ package options;
 
 import states.MainMenuState;
 import backend.StageData;
+import.mobile.objects.BackButton;
 
 class OptionsState extends MusicBeatState
 {
@@ -48,6 +49,8 @@ class OptionsState extends MusicBeatState
 
 	var selectorLeft:Alphabet;
 	var selectorRight:Alphabet;
+	var allowMouse:Bool = true;
+	var backButton:BackButton;
 
 	override function create()
 	{
@@ -95,7 +98,10 @@ class OptionsState extends MusicBeatState
 		ClientPrefs.saveSettings();
 
 		addTouchPad('UP_DOWN', 'A_B_C');
-
+		backButton = new BackButton();
+		backButton.alpha = 0.6;
+		add(backButton);
+		
 		super.create();
 	}
 
@@ -115,6 +121,20 @@ class OptionsState extends MusicBeatState
 	var exiting = false;
 	override function update(elapsed:Float) {
 		super.update(elapsed);
+
+		if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(backButton, FlxG.camera))
+		{
+			backButton.animation.play('confirm');
+			FlxG.sound.play(Paths.sound('cancelMenu'));
+			if(onPlayState)
+				{
+					StageData.loadDirectory(PlayState.SONG);
+					LoadingState.loadAndSwitchState(new PlayState());
+					FlxG.sound.music.volume = 0;
+				} else {
+					MusicBeatState.switchState(new MainMenuState());
+				}
+		}
 
 		if(!exiting) {
 			if (controls.UI_UP_P)
