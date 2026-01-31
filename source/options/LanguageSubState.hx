@@ -24,7 +24,7 @@ class LanguageSubState extends MusicBeatSubstate
 		add(bg);
 		add(grpLanguages);
 
-		backButton = new BackButton;
+		backButton = new BackButton();
 		backButton.alpha = 0.6;
 		add(backButton);
 
