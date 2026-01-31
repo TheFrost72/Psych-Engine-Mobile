@@ -14,6 +14,7 @@ import options.ModSettingsSubState;
 
 import openfl.display.BitmapData;
 import lime.utils.Assets;
+import mobile.objects.BackButton;
 
 class ModsMenuState extends MusicBeatState
 {
@@ -45,6 +46,8 @@ class ModsMenuState extends MusicBeatState
 
 	var noModsSine:Float = 0;
 	var noModsTxt:FlxText;
+
+	var backButton:BackButton;
 
 	var _lastControllerMode:Bool = false;
 	var startMod:String = null;
@@ -322,6 +325,11 @@ class ModsMenuState extends MusicBeatState
 		touchPad.y -= 215; // so that you can press the buttons.
 		if (controls.mobileC)
 			touchPad.alpha = 0.3;
+
+		backButton = new BackButton();
+		backButton.alpha = 0.6;
+		add(backButton);
+		
 		super.create();
 	}
 	
@@ -355,6 +363,35 @@ class ModsMenuState extends MusicBeatState
 				FlxG.camera.fade(FlxColor.BLACK, 0.5, false, FlxG.resetGame, false);
 			}
 			else MusicBeatState.switchState(new MainMenuState());
+
+			persistentUpdate = false;
+			FlxG.autoPause = ClientPrefs.data.autoPause;
+			FlxG.mouse.visible = false;
+			return;
+		}
+
+		if (FlxG.mouse.justPressed && !hoveringOnMods && !exiting && FlxG.mouse.overlaps(backButton, FlxG.camera))
+		{
+			exiting = true;
+			saveTxt();
+
+			FlxG.sound.play(Paths.sound('cancelMenu'));
+			if(waitingToRestart)
+			{
+				//MusicBeatState.switchState(new TitleState());
+				TitleState.initialized = false;
+				TitleState.closedState = false;
+				FlxG.sound.music.fadeOut(0.3);
+				if(FreeplayState.vocals != null)
+				{
+					FreeplayState.vocals.fadeOut(0.3);
+					FreeplayState.vocals = null;
+				}
+				FlxG.camera.fade(FlxColor.BLACK, 0.5, false, FlxG.resetGame, false);
+				backButton.animation.play('confirm');
+			}
+			else MusicBeatState.switchState(new MainMenuState());
+			backButton.animation.play('confirm');
 
 			persistentUpdate = false;
 			FlxG.autoPause = ClientPrefs.data.autoPause;
