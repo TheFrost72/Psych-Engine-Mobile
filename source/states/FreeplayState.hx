@@ -15,6 +15,8 @@ import flixel.util.FlxDestroyUtil;
 
 import openfl.utils.Assets;
 
+import mobile.objects.BackButton;
+
 import haxe.Json;
 
 class FreeplayState extends MusicBeatState
@@ -51,6 +53,9 @@ class FreeplayState extends MusicBeatState
 	var bottomBG:FlxSprite;
 
 	var player:MusicPlayer;
+
+	var allowMouse:Bool = true;
+	var backButton:BackButton;
 
 	override function create()
 	{
@@ -199,6 +204,10 @@ class FreeplayState extends MusicBeatState
 		updateTexts();
 
 		addTouchPad('LEFT_FULL', 'A_B_C_X_Y_Z');
+
+		backButton = new backButton();
+		backButton.alpha = 0.6;
+		add(backButton);
 		super.create();
 	}
 
@@ -230,6 +239,32 @@ class FreeplayState extends MusicBeatState
 	var stopMusicPlay:Bool = false;
 	override function update(elapsed:Float)
 	{
+		if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(backButton, FlxCamera))
+		{
+			if (player.playingMusic)
+			{
+				FlxG.sound.music.stop();
+				destroyFreeplayVocals();
+				FlxG.sound.music.volume = 0;
+				instPlaying = -1;
+
+				backButton.animation.play('confirm');
+
+				player.playingMusic = false;
+				player.switchPlayMusic();
+
+				FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
+				FlxTween.tween(FlxG.sound.music, {volume: 1}, 1);
+			}
+			else 
+			{
+				backButton.animation.play('confirm');
+				persistentUpdate = false;
+				FlxG.sound.play(Paths.sound('cancelMenu'));
+				MusicBeatState.switchState(new MainMenuState());
+			}
+		}
+		
 		if(WeekData.weeksList.length < 1)
 			return;
 
