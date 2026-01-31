@@ -4,6 +4,7 @@ import backend.InputFormatter;
 import flixel.addons.display.FlxBackdrop;
 import flixel.addons.display.FlxGridOverlay;
 import objects.AttachedSprite;
+import mobile.objects.BackButton;
 
 import flixel.input.keyboard.FlxKey;
 import flixel.input.gamepad.FlxGamepad;
@@ -14,6 +15,8 @@ class ControlsSubState extends MusicBeatSubstate
 {
 	var curSelected:Int = 0;
 	var curAlt:Bool = false;
+	var allowMouse:Bool = true;
+	var backButton:BackButton;
 
 	//Show on gamepad - Display name - Save file key - Rebind display name
 	var options:Array<Dynamic> = [
@@ -118,6 +121,9 @@ class ControlsSubState extends MusicBeatSubstate
 		createTexts();
 		
 		addTouchPad('NONE', 'B');
+		backButton = new BackButton();
+		backButton.alpha = 0.6;
+		add(backButton);
 	}
 
 	var lastID:Int = 0;
@@ -283,6 +289,14 @@ class ControlsSubState extends MusicBeatSubstate
 		{
 			timeForMoving = Math.max(0, timeForMoving - elapsed);
 			super.update(elapsed);
+			return;
+		}
+
+		if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(backButton, FlxG.camera))
+		{
+			backButton.animation.play('confirm');
+			controls.isInSubstate = false;
+			close();
 			return;
 		}
 
