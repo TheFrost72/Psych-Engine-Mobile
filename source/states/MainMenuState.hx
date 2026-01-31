@@ -178,13 +178,23 @@ class MainMenuState extends MusicBeatState
 
 		if (!selectedSomethin)
 		{
+			if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(backButton, FlxG.camera))
+			{
+				selectedSomethin = true;
+				backButton.animation.play('confirm');
+				FlxG.mouse.visible = false;
+				FlxG.sound.play(Paths.sound('cancelMenu'));
+				MusicBeatState.switchState(new TitleState());
+		return;
+			}
+			
 			if (controls.UI_UP_P)
 				changeItem(-1);
 
 			if (controls.UI_DOWN_P)
 				changeItem(1);
 
-			var allowMouse:Bool = allowMouse;
+			//var allowMouse:Bool = allowMouse;
 			if (allowMouse && ((FlxG.mouse.deltaScreenX != 0 && FlxG.mouse.deltaScreenY != 0) || FlxG.mouse.justPressed)) //FlxG.mouse.deltaScreenX/Y checks is more accurate than FlxG.mouse.justMoved
 			{
 				allowMouse = false;
@@ -282,7 +292,7 @@ class MainMenuState extends MusicBeatState
 					}
 			}
 
-			if (controls.BACK || backButton.wasPressed)
+			if (controls.BACK)
 			{
 				selectedSomethin = true;
 				FlxG.mouse.visible = false;
