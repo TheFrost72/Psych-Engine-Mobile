@@ -205,7 +205,7 @@ class FreeplayState extends MusicBeatState
 
 		addTouchPad('LEFT_FULL', 'A_B_C_X_Y_Z');
 
-		backButton = new backButton();
+		backButton = new BackButton();
 		backButton.alpha = 0.6;
 		add(backButton);
 		super.create();
