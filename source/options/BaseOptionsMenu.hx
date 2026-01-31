@@ -5,6 +5,8 @@ import flixel.input.gamepad.FlxGamepad;
 import flixel.input.gamepad.FlxGamepadInputID;
 import flixel.input.gamepad.FlxGamepadManager;
 
+import mobile.objects.BackButton;
+
 import objects.CheckboxThingie;
 import objects.AttachedText;
 import options.Option;
@@ -27,6 +29,10 @@ class BaseOptionsMenu extends MusicBeatSubstate
 	public var rpcTitle:String;
 
 	public var bg:FlxSprite;
+	
+	var backButton:BackButton;
+	var allowMouse:Bool = true;
+	
 	public function new()
 	{
 		controls.isInSubstate = true;
@@ -57,6 +63,10 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 		checkboxGroup = new FlxTypedGroup<CheckboxThingie>();
 		add(checkboxGroup);
+
+		backButton = new BackButton();
+		backButton.alpha = 0.6;
+		add(backButton);
 
 		descBox = new FlxSprite().makeGraphic(1, 1, FlxColor.BLACK);
 		descBox.alpha = 0.6;
@@ -152,6 +162,13 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		if (controls.BACK) {
 			close();
 			FlxG.sound.play(Paths.sound('cancelMenu'));
+		}
+
+		if(FlxG.mouse.justPressed && FlxG.mouse.overlaps(backButton, FlxG.camera))
+		{
+			backButton.animation.play('confirm');
+FlxG.sound.play(Paths.sound('cancelMenu'));
+			close();
 		}
 
 		if(nextAccept <= 0)
