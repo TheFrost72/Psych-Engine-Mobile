@@ -224,7 +224,7 @@ class StoryMenuState extends MusicBeatState
 			return;
 		}
 
-		if (FlxG.mouse.justPressed && !movedback && !selectedWeek && FlxG.mouse.overlaps(backButton, FlxG.camera))
+		if (FlxG.mouse.justPressed && !movedBack && !selectedWeek && FlxG.mouse.overlaps(backButton, FlxG.camera))
 		{
 			backButton.animation.play('confirm');
 			FlxG.sound.play(Paths.sound('cancelMenu'));
