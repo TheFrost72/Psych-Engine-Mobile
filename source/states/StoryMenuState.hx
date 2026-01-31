@@ -177,7 +177,7 @@ class StoryMenuState extends MusicBeatState
 		tracksSprite.x -= tracksSprite.width/2;
 		add(tracksSprite);
 
-		txtTracklist = new FlxText(FlxG.width * 0.07 + 100, tracksSprite.y + 60, 0, "", 32);
+		txtTracklist = new FlxText(FlxG.width * 0.01 + 100, tracksSprite.y + 60, 0, "", 32);
 		txtTracklist.alignment = CENTER;
 		txtTracklist.font = Paths.font("vcr.ttf");
 		txtTracklist.color = 0xFFe55777;
@@ -444,12 +444,16 @@ class StoryMenuState extends MusicBeatState
 			bgSprite.visible = false;
 		} else {
 			bgSprite.loadGraphic(Paths.image('menubackgrounds/menu_' + assetName));
+		var scaleBG:Float = FlxG.width / 1280;
+		bgSprite.scale.set(scaleBG, scaleBG);
+		bgSprite.updateHitbox();
+		bgSprite.screenCenter(X);
+			
 		}
 		PlayState.storyWeek = curWeek;
 
 		Difficulty.loadFromWeek();
 		difficultySelectors.visible = unlocked;
-
 		if(Difficulty.list.contains(Difficulty.getDefault()))
 			curDifficulty = Math.round(Math.max(0, Difficulty.defaultList.indexOf(Difficulty.getDefault())));
 		else
