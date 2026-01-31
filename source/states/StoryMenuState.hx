@@ -13,6 +13,8 @@ import objects.MenuCharacter;
 import options.GameplayChangersSubstate;
 import substates.ResetScoreSubState;
 
+import mobile.objects.BackButton;
+
 import backend.StageData;
 
 class StoryMenuState extends MusicBeatState
@@ -40,6 +42,9 @@ class StoryMenuState extends MusicBeatState
 	var sprDifficulty:FlxSprite;
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
+
+	var allowMouse:Bool = true;
+	var backButton:BackButton;
 
 	var loadedWeeks:Array<WeekData> = [];
 
@@ -190,6 +195,10 @@ class StoryMenuState extends MusicBeatState
 
 		addTouchPad('LEFT_FULL', 'A_B_X_Y');
 
+		backButton = new BackButton();
+		backButton.alpha = 0.6;
+		add(backButton);
+
 		super.create();
 	}
 
@@ -213,6 +222,14 @@ class StoryMenuState extends MusicBeatState
 			}
 			super.update(elapsed);
 			return;
+		}
+
+		if (FlxG.mouse.justPressed && !movedback && !selectedWeek && FlxG.mouse.overlaps(backButton, FlxG.camera))
+		{
+			backButton.animation.play('confirm');
+			FlxG.sound.play(Paths.sound('cancelMenu'));
+			movedBack = true;
+			MusicBeatState.switchState(new MainMenuState());
 		}
 
 		// scoreText.setFormat(Paths.font("vcr.ttf"), 32);
