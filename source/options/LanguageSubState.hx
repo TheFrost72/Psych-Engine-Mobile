@@ -11,6 +11,7 @@ class LanguageSubState extends MusicBeatSubstate
 	var displayLanguages:Map<String, String> = [];
 	var curSelected:Int = 0;
 	var allowMouse:Bool = true;
+	var backButton:BackButton;
 	public function new()
 	{
 		super();
