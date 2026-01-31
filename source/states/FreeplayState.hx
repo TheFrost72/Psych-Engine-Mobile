@@ -239,7 +239,7 @@ class FreeplayState extends MusicBeatState
 	var stopMusicPlay:Bool = false;
 	override function update(elapsed:Float)
 	{
-		if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(backButton, Flx.camera))
+		if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(backButton, FlxG.camera))
 		{
 			if (player.playingMusic)
 			{
