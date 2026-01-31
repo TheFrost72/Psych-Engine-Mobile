@@ -4,6 +4,7 @@ import backend.StageData;
 import objects.Character;
 import objects.Bar;
 import flixel.addons.display.shapes.FlxShapeCircle;
+import mobile.objects.BackButton;
 
 import states.stages.StageWeek1 as BackgroundStage;
 
@@ -34,6 +35,7 @@ class NoteOffsetState extends MusicBeatState
 
 	var controllerPointer:FlxSprite;
 	var _lastControllerMode:Bool = false;
+	var backButton:BackButton;
 
 	override public function create()
 	{
@@ -169,6 +171,10 @@ class NoteOffsetState extends MusicBeatState
 
 		Conductor.bpm = 128.0;
 		FlxG.sound.playMusic(Paths.music('offsetSong'), 1, true);
+		
+		backButton = new BackButton();
+		backButton.alpha = 0.6;
+		add(backButton);
 
 		super.create();
 	}
@@ -406,6 +412,25 @@ class NoteOffsetState extends MusicBeatState
 
 			persistentUpdate = false;
 			MusicBeatState.switchState(new options.OptionsState());
+			if(OptionsState.onPlayState)
+			{
+				if(ClientPrefs.data.pauseMusic != 'None')
+					FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.data.pauseMusic)));
+				else
+					FlxG.sound.music.volume = 0;
+			}
+			else FlxG.sound.playMusic(Paths.music('freakyMenu'));
+			FlxG.mouse.visible = false;
+		}
+
+		if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(backButton, FlxG.camera));
+		{
+			if(zoomTween != null) zoomTween.cancel();
+			if(beatTween != null) beatTween.cancel();
+
+			persistentUpdate = false;
+			MusicBeatState.switchState(new options.OptionsState());
+			backButton.animation.play('confirm');
 			if(OptionsState.onPlayState)
 			{
 				if(ClientPrefs.data.pauseMusic != 'None')
