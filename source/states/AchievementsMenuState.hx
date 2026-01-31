@@ -3,6 +3,7 @@ package states;
 import flixel.FlxObject;
 import flixel.util.FlxSort;
 import objects.Bar;
+import mobile.objects.BackButton;
 
 #if ACHIEVEMENTS_ALLOWED
 class AchievementsMenuState extends MusicBeatState
@@ -19,7 +20,8 @@ class AchievementsMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 
 	var MAX_PER_ROW:Int = 4;
-
+	var allowMouse:Bool = true;
+	var backButton:BackButton;
 	override function create()
 	{
 		Paths.clearStoredMemory();
@@ -124,6 +126,9 @@ class AchievementsMenuState extends MusicBeatState
 		_changeSelection();
 
 		addTouchPad('LEFT_FULL', 'B_C');
+		backButton = new BackButton();
+		backButton.alpha = 0.6;
+		add(backButton);
 
 		super.create();
 		
@@ -219,6 +224,13 @@ class AchievementsMenuState extends MusicBeatState
 			MusicBeatState.switchState(new MainMenuState());
 			goingBack = true;
 		}
+		if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(backButton, FlxG.camera)) {
+			backButton.animation.play('confirm');
+			FlxG.sound.play(Paths.sound('cancelMenu'));
+			MusicBeatState.switchState(new MainMenuState());
+			goingBack = true;
+		}
+			
 		super.update(elapsed);
 	}
 
