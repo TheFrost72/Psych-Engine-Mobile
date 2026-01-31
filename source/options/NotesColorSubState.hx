@@ -216,7 +216,7 @@ class NotesColorSubState extends MusicBeatSubstate
 			return;
 		}
 
-		if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(backButton, FlxG.camera));
+		if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(backButton, FlxG.camera))
 		{
 			backButton.animation.play('confirm');
 			FlxG.mouse.visible = false;
