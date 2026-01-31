@@ -1,6 +1,7 @@
 package options;
 
 import openfl.utils.Assets;
+import mobile.objects.BackButton;
 
 class LanguageSubState extends MusicBeatSubstate
 {
@@ -9,6 +10,7 @@ class LanguageSubState extends MusicBeatSubstate
 	var languages:Array<String> = [];
 	var displayLanguages:Map<String, String> = [];
 	var curSelected:Int = 0;
+	var allowMouse:Bool = true;
 	public function new()
 	{
 		super();
@@ -22,7 +24,11 @@ class LanguageSubState extends MusicBeatSubstate
 		add(bg);
 		add(grpLanguages);
 
-		languages.push(ClientPrefs.defaultData.language); //English (US)
+		backButton = new BackButton;
+		backButton.alpha = 0.6;
+		add(backButton);
+
+languages.push(ClientPrefs.defaultData.language); //English (US)
 		displayLanguages.set(ClientPrefs.defaultData.language, Language.defaultLangName);
 		var directories:Array<String> = Mods.directoriesWithFile(Paths.getSharedPath(), 'data/');
 		for (directory in directories)
@@ -102,6 +108,19 @@ class LanguageSubState extends MusicBeatSubstate
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
+
+		if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(backButton, FlxG.camera));
+		{
+			if(changedLanguage)
+			{
+				FlxTransitionableState.skipNextTransIn = true;
+				FlxTransitionableState.skipNextTransOut = true;
+				MusicBeatState.resetState();
+			}
+			else close();
+			FlxG.sound.play(Paths.sound('cancelMenu'));
+			backButton.animation.play('confirm');
+		}
 
 		var mult:Int = (FlxG.keys.pressed.SHIFT) ? 4 : 1;
 		if(controls.UI_UP_P)
