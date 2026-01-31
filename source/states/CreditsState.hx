@@ -1,6 +1,7 @@
 package states;
 
 import objects.AttachedSprite;
+import mobile.objects.BackButton;
 
 class CreditsState extends MusicBeatState
 {
@@ -16,6 +17,8 @@ class CreditsState extends MusicBeatState
 	var descBox:AttachedSprite;
 
 	var offsetThing:Float = -75;
+	var allowMouse:Bool = true;
+	var backButton:BackButton;
 
 	override function create()
 	{
@@ -138,6 +141,9 @@ class CreditsState extends MusicBeatState
 		changeSelection();
 
 		addTouchPad('UP_DOWN', 'A_B');
+		backButton = new BackButton();
+		backButton.alpha = 0.6;
+		add(backButton);
 
 		super.create();
 	}
@@ -190,6 +196,12 @@ class CreditsState extends MusicBeatState
 			}
 			if (controls.BACK)
 			{
+				FlxG.sound.play(Paths.sound('cancelMenu'));
+				MusicBeatState.switchState(new MainMenuState());
+				quitting = true;
+			}
+			if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(backButton, FlxG.camera)) {
+				backButton.animation.play('confirm');
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				MusicBeatState.switchState(new MainMenuState());
 				quitting = true;
