@@ -9,6 +9,7 @@ import lime.system.Clipboard;
 import flixel.util.FlxGradient;
 import objects.StrumNote;
 import objects.Note;
+import mobile.objects.BackButton;
 
 import shaders.RGBPalette;
 import shaders.RGBPalette.RGBShaderReference;
@@ -41,6 +42,8 @@ class NotesColorSubState extends MusicBeatSubstate
 
 	var modeBG:FlxSprite;
 	var notesBG:FlxSprite;
+
+	var backButton:BackButton;
 
 	// controller support
 	var controllerPointer:FlxSprite;
@@ -183,6 +186,10 @@ class NotesColorSubState extends MusicBeatSubstate
 		touchPad.buttonB.x = FlxG.width - 132;
 		touchPad.buttonC.x = 0;
 		touchPad.buttonC.y = FlxG.height - 135;
+
+		backButton = new BackButton();
+		backButton.alpha = 0.6;
+		add(backButton);
 	}
 
 	function updateTip()
@@ -202,6 +209,16 @@ class NotesColorSubState extends MusicBeatSubstate
 
 	override function update(elapsed:Float) {
 		if (controls.BACK) {
+			FlxG.mouse.visible = false;
+			FlxG.sound.play(Paths.sound('cancelMenu'));
+			controls.isInSubstate = false;
+			close();
+			return;
+		}
+
+		if (FlxG.mouse.justPressed && FlxG.mouse.overlaps(backButton, FlxG.camera));
+		{
+			backButton.animation.play('confirm');
 			FlxG.mouse.visible = false;
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			controls.isInSubstate = false;
