@@ -64,6 +64,11 @@ class TitleState extends MusicBeatState
 	var easterEggKeysBuffer:String = '';
 	#end
 
+	var uiScale:Float = Math.min(FlxG.width / 1280, FlxG.height / 720);
+
+	var offsetX:Float = (FlxG.width  - 1280 * uiScale) / 2;
+	var offsetY:Float = (FlxG.height - 720  * uiScale) / 2;
+
 	override public function create():Void
 	{
 		Paths.clearStoredMemory();
@@ -129,18 +134,19 @@ class TitleState extends MusicBeatState
 		#if TITLE_SCREEN_EASTER_EGG easterEggData(); #end
 		Conductor.bpm = musicBPM;
 
-		logoBl = new FlxSprite(logoPosition.x, logoPosition.y);
+		logoBl = new FlxSprite(offsetX + logoPosition.x * uiScale,offsetY + logoPosition.y * uiScale);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 		logoBl.antialiasing = ClientPrefs.data.antialiasing;
-		logoBl.scale.set(1.1, 1.1);
+		logoBl.scale.set(uiScale, uiScale);
 
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
 
-		gfDance = new FlxSprite(gfPosition.x, gfPosition.y);
+		gfDance = new FlxSprite(offsetX + gfPosition.x * uiScale,offsetY + gfPosition.y * uiScale);
 		gfDance.antialiasing = ClientPrefs.data.antialiasing;
-		gfDance.scale.set(1.1, 1.1);
+		gfDance.scale.set(uiScale, uiScale);
+		gfDance.updateHitbox();
 		
 		if(ClientPrefs.data.shaders)
 		{
@@ -164,9 +170,9 @@ class TitleState extends MusicBeatState
 
 
 		var animFrames:Array<FlxFrame> = [];
-		titleText = new FlxSprite(enterPosition.x, enterPosition.y);
+		titleText = new FlxSprite(offsetX + enterPosition.x * uiScale,offsetY + enterPosition.y * uiScale);
 		titleText.frames = Paths.getSparrowAtlas('titleEnter');
-		titleText.scale.set(1.1, 1.1);
+		titleText.scale.set(uiScale, uiScale);
 		@:privateAccess
 		{
 			titleText.animation.findByPrefix(animFrames, "ENTER IDLE");
@@ -220,9 +226,9 @@ class TitleState extends MusicBeatState
 	var characterImage:String = 'gfDanceTitle';
 	var animationName:String = 'gfDance';
 
-	var gfPosition:FlxPoint = FlxPoint.get(870, 80);
-	var logoPosition:FlxPoint = FlxPoint.get(-40, -120);
-	var enterPosition:FlxPoint = FlxPoint.get(200, 650);
+	var gfPosition:FlxPoint = FlxPoint.get(512, 40);
+	var logoPosition:FlxPoint = FlxPoint.get(-150, -100);
+	var enterPosition:FlxPoint = FlxPoint.get(100, 576);
 	
 	var useIdle:Bool = false;
 	var musicBPM:Float = 102;
