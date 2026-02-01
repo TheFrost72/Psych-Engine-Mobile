@@ -75,8 +75,8 @@ class TitleState extends MusicBeatState
 		Paths.clearUnusedMemory();
 		
 		uiScale = Math.min(FlxG.width / 1280, FlxG.height / 720);
-		offsetX:Float = (FlxG.width  - 1280 * uiScale) / 2;
-		offsetY:Float = (FlxG.height - 720  * uiScale) / 2;
+		offsetX = (FlxG.width  - 1280 * uiScale) / 2;
+		offsetY = (FlxG.height - 720  * uiScale) / 2;
 
 		if(!initialized)
 		{
