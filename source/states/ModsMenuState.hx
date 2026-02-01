@@ -48,7 +48,7 @@ class ModsMenuState extends MusicBeatState
 	var noModsTxt:FlxText;
 
 	var backButton:BackButton;
- var backButton:BackButton;
+	var backButton:BackButton;
 
 	var _lastControllerMode:Bool = false;
 	var startMod:String = null;
