@@ -48,6 +48,7 @@ class ModsMenuState extends MusicBeatState
 	var noModsTxt:FlxText;
 
 	var backButton:BackButton;
+ var backButton:BackButton;
 
 	var _lastControllerMode:Bool = false;
 	var startMod:String = null;
@@ -370,7 +371,7 @@ class ModsMenuState extends MusicBeatState
 			return;
 		}
 
-		if (FlxG.mouse.justPressed && !hoveringOnMods && !exiting && FlxG.mouse.overlaps(backButton, FlxG.camera))
+		if (FlxG.mouse.justPressed && !exiting && FlxG.mouse.overlaps(backButton, FlxG.camera))
 		{
 			exiting = true;
 			saveTxt();
@@ -395,7 +396,7 @@ class ModsMenuState extends MusicBeatState
 
 			persistentUpdate = false;
 			FlxG.autoPause = ClientPrefs.data.autoPause;
-			FlxG.mouse.visible = false;
+			FlxG.mouse.visible = true;
 			return;
 		}
 
