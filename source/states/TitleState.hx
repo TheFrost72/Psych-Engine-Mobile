@@ -64,16 +64,19 @@ class TitleState extends MusicBeatState
 	var easterEggKeysBuffer:String = '';
 	#end
 
-	var uiScale:Float = Math.min(FlxG.width / 1280, FlxG.height / 720);
-
-	var offsetX:Float = (FlxG.width  - 1280 * uiScale) / 2;
-	var offsetY:Float = (FlxG.height - 720  * uiScale) / 2;
+	var uiScale:Float;
+	var offsetX:Float;
+	var offsetY:Float;
 
 	override public function create():Void
 	{
 		Paths.clearStoredMemory();
 		super.create();
 		Paths.clearUnusedMemory();
+		
+		uiScale = Math.min(FlxG.width / 1280, FlxG.height / 720);
+		offsetX:Float = (FlxG.width  - 1280 * uiScale) / 2;
+		offsetY:Float = (FlxG.height - 720  * uiScale) / 2;
 
 		if(!initialized)
 		{
