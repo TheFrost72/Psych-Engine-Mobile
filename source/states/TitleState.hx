@@ -137,18 +137,22 @@ class TitleState extends MusicBeatState
 		#if TITLE_SCREEN_EASTER_EGG easterEggData(); #end
 		Conductor.bpm = musicBPM;
 
-		logoBl = new FlxSprite(offsetX + logoPosition.x * uiScale,offsetY + logoPosition.y * uiScale);
+		logoBl = new FlxSprite(logoPosition.x, logoPosition.y);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 		logoBl.antialiasing = ClientPrefs.data.antialiasing;
 		logoBl.scale.set(uiScale, uiScale);
+		logoBl.x = offsetX + logoPosition.x * uiScale;
+		logoBl.y = offsetY + logoPosition.y * uiScale;
 
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
 		logoBl.updateHitbox();
 
-		gfDance = new FlxSprite(offsetX + gfPosition.x * uiScale,offsetY + gfPosition.y * uiScale);
+		gfDance = new FlxSprite(gfPosition.x, gfPosition.y);
 		gfDance.antialiasing = ClientPrefs.data.antialiasing;
 		gfDance.scale.set(uiScale, uiScale);
+		gfDance.x = offsetX + gfPosition.x * uiScale;
+		gfDance.y = offsetY + gfPosition.y * uiScale;
 		gfDance.updateHitbox();
 		
 		if(ClientPrefs.data.shaders)
@@ -173,9 +177,11 @@ class TitleState extends MusicBeatState
 
 
 		var animFrames:Array<FlxFrame> = [];
-		titleText = new FlxSprite(offsetX + enterPosition.x * uiScale,offsetY + enterPosition.y * uiScale);
+		titleText = new FlxSprite(enterPosition.x, enterPosition.y);
 		titleText.frames = Paths.getSparrowAtlas('titleEnter');
 		titleText.scale.set(uiScale, uiScale);
+		titleText.x = offsetX + enterPosition.x * uiScale;
+		titleText.y = offsetY + enterPosition.y * uiScale;
 		@:privateAccess
 		{
 			titleText.animation.findByPrefix(animFrames, "ENTER IDLE");
